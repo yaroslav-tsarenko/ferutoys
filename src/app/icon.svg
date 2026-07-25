@@ -1,0 +1,13 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="38" height="38" rx="11" fill="#241722"/>
+  <rect x="1" y="1" width="38" height="38" rx="11" stroke="#D0A85F" stroke-opacity="0.45" stroke-width="1"/>
+  <path d="M20 4.5C20.9 14 21.9 16.9 24.4 18C26.9 19.1 29.9 19.9 36 20C29.9 20.1 26.9 20.9 24.4 22C21.9 23.1 20.9 26 20 35.5C19.1 26 18.1 23.1 15.6 22C13.1 20.9 10.1 20.1 4 20C10.1 19.9 13.1 19.1 15.6 18C18.1 16.9 19.1 14 20 4.5Z"
+        fill="url(#ftSpark)"/>
+  <defs>
+    <radialGradient id="ftSpark" cx="50%" cy="44%" r="58%" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#F0D9A0"/>
+      <stop offset="0.52" stop-color="#D0A85F"/>
+      <stop offset="1" stop-color="#B4863F"/>
+    </radialGradient>
+  </defs>
+</svg>

@@ -1,0 +1,269 @@
+/*
+ * FeruToys — "Soft Sensual Boutique" design tokens.
+ * A tasteful intimacy brand: warm blush-nude paper, deep sensual burgundy,
+ * brushed-brass "spark" highlights and a dusty mauve-pink glow. Candlelit deep
+ * aubergine is the first-class night theme; a warm blush light theme is an
+ * opt-in. Sensual, elegant, never vulgar — privacy and trust felt throughout.
+ *
+ * Consumed by @theme in globals.css so Tailwind utilities pick these up
+ * automatically. Legacy names are aliased so older components keep working.
+ */
+
+/* ── DEFAULT (candlelit dark — deep aubergine / espresso) ────────────── */
+:root {
+  /* ── Brand ──────────────────────────────────────────────────────────── */
+  --color-primary: #C25E77;          /* softened sensual wine-rose — CTAs, emphasis */
+  --color-primary-hover: #D4718A;
+  --color-primary-tint: #3A2130;     /* soft wine fill on dark */
+  --color-primary-glow: rgba(194, 94, 119, 0.26);
+  --color-primary-fg: #FBECEF;
+
+  --color-accent: #C25E77;           /* alias — accent === primary wine */
+  --color-accent-hover: #D4718A;
+  --color-accent-tint: #3A2130;
+  --color-accent-fg: #FBECEF;
+
+  --color-bronze: #D0A85F;           /* brushed brass — the "spark" highlight */
+  --color-bronze-hover: #DDB877;
+  --color-bronze-tint: rgba(199, 154, 82, 0.16);
+
+  --color-teal: #8FAF97;             /* muted sage — success, in-stock, secure */
+  --color-teal-hover: #9FBCA6;
+  --color-teal-tint: rgba(126, 155, 132, 0.16);
+
+  --color-coral: #C25E77;            /* offers routed to wine — elegant, never harsh red */
+  --color-coral-hover: #D4718A;
+  --color-coral-tint: rgba(194, 94, 119, 0.14);
+
+  --color-violet: #D98BA0;           /* dusty mauve-pink — gentle highlights */
+  --color-violet-hover: #E39FB1;
+  --color-violet-tint: rgba(217, 139, 160, 0.16);
+
+  --color-secondary: #2A1C24;
+  --color-price: var(--color-primary);
+  --color-cta: var(--color-primary);
+  --color-cta-hover: var(--color-primary-hover);
+  --color-header: #1A0F15;
+  --color-header-secondary: #241722;
+
+  /* Legacy aliases used across older components */
+  --color-accent-light: var(--color-accent-tint);
+  --color-accent-2: var(--color-bronze);
+  --color-accent-2-hover: var(--color-bronze-hover);
+  --color-accent-3: var(--color-teal);
+  --color-accent-4: #C2A9B2;
+
+  /* ── Surfaces (candlelit — deep aubergine / espresso) ───────────── */
+  --color-bg: #1E1318;               /* deep aubergine — page bg */
+  --color-bg-elevated: #2A1C24;      /* lifted aubergine — cards, dialogs */
+  --color-bg-secondary: #241722;     /* alternating section tint */
+  --color-bg-tertiary: #31212B;      /* muted plum panel */
+  --color-bg-warm: #241722;
+  --color-bg-cool: #2A1C24;
+
+  /* ── Text (candlelit) ───────────────────────────────────────────── */
+  --color-text: #F6ECEC;             /* warm off-white ink */
+  --color-text-secondary: #C2A9B2;   /* muted rose-grey */
+  --color-text-tertiary: #8C7681;
+  --color-text-inverse: #2E1B24;
+
+  /* ── Lines (candlelit) ──────────────────────────────────────────── */
+  --color-border: #3C2A34;           /* soft plum hairline */
+  --color-border-hover: #4E3946;
+  --color-border-strong: #614859;
+  --color-hairline: rgba(246, 236, 236, 0.08);
+
+  /* ── Status (candlelit) ─────────────────────────────────────────── */
+  --color-success: #8FAF97;          /* sage — "in stock" / "secure" */
+  --color-success-light: rgba(126, 155, 132, 0.16);
+  --color-warning: #D0A85F;
+  --color-warning-light: rgba(199, 154, 82, 0.16);
+  --color-danger: #C25E77;           /* offers routed to wine, not red */
+  --color-danger-light: rgba(194, 94, 119, 0.12);
+  --color-info: #D98BA0;
+
+  /* ── Elevation — soft, glow-first ───────────────────────────────── */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.40);
+  --shadow-lg: 0 14px 34px rgba(0, 0, 0, 0.45);
+  --shadow-xl: 0 26px 60px rgba(0, 0, 0, 0.50);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-card-hover: 0 12px 30px rgba(194, 94, 119, 0.18);
+  --shadow-accent: 0 10px 24px rgba(194, 94, 119, 0.30);
+  --shadow-warm: 0 10px 24px rgba(199, 154, 82, 0.24);
+  --shadow-glow-amber: 0 0 28px rgba(194, 94, 119, 0.40);   /* wine glow */
+  --shadow-glow-azure: 0 0 28px rgba(217, 139, 160, 0.38);  /* legacy alias → mauve */
+  --shadow-glow-violet: 0 0 28px rgba(217, 139, 160, 0.42);
+
+  /* ── Gradients ──────────────────────────────────────────────────── */
+  --gradient-primary: linear-gradient(135deg, #C25E77 0%, #7B2D42 100%);
+  --gradient-accent: linear-gradient(135deg, #D98BA0 0%, #C25E77 100%);
+  --gradient-warm: linear-gradient(180deg, #2A1C24 0%, #1E1318 100%);
+  --gradient-cool: linear-gradient(180deg, #241722 0%, #1E1318 100%);
+  --gradient-hero: linear-gradient(135deg, #1E1318 0%, #31212B 55%, #3A2130 100%);
+  --gradient-badge: linear-gradient(135deg, #C25E77 0%, #7B2D42 100%);
+  --gradient-mint: linear-gradient(135deg, rgba(217, 139, 160, 0.12) 0%, rgba(199, 154, 82, 0.10) 100%);
+  --gradient-sunset: linear-gradient(135deg, rgba(194, 94, 119, 0.12) 0%, rgba(199, 154, 82, 0.10) 100%);
+  --gradient-electric: linear-gradient(135deg, #C25E77 0%, #D98BA0 100%);
+  --gradient-card-hover: linear-gradient(180deg, rgba(194, 94, 119, 0.07) 0%, rgba(217, 139, 160, 0.06) 100%);
+
+  /* ── Radii — soft, pill-forward (16–24px) ───────────────────────── */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-pill: 9999px;
+
+  /* ── Layout ─────────────────────────────────────────────────────── */
+  --max-width: 1280px;
+  --header-height: 152px;
+  --announcement-height: 36px;
+
+  /* ── Type — sensual serif display + soft humanist sans ──────────── */
+  --font-sans: "Inter", var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fraunces", "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
+  --font-serif: "Fraunces", "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", var(--font-geist-mono), ui-monospace, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Promo tints ────────────────────────────────────────────────── */
+  --promo-bg-blue: rgba(217, 139, 160, 0.12);
+  --promo-bg-warm: rgba(199, 154, 82, 0.10);
+  --promo-bg-green: rgba(126, 155, 132, 0.10);
+  --promo-bg-purple: rgba(194, 94, 119, 0.14);
+  --promo-bg-pink: rgba(217, 139, 160, 0.12);
+
+  color-scheme: dark;
+}
+
+/* ── LIGHT-MODE OPT-IN — warm blush boutique ──────────────────────
+   Warm blush-nude backgrounds, plum-brown text, deep burgundy accents,
+   brushed brass "spark" details. Activated with .light or [data-theme="light"].
+*/
+[data-theme="light"],
+.light {
+  /* Brand — deep sensual burgundy on blush */
+  --color-primary: #7B2D42;
+  --color-primary-hover: #8E3550;
+  --color-primary-tint: #F3DDE2;
+  --color-primary-glow: rgba(123, 45, 66, 0.20);
+  --color-primary-fg: #FFF7F9;
+
+  --color-accent: #7B2D42;
+  --color-accent-hover: #8E3550;
+  --color-accent-tint: #F3DDE2;
+  --color-accent-fg: #FFF7F9;
+
+  --color-bronze: #9A7433;           /* brass — darkened for AA text on blush */
+  --color-bronze-hover: #846129;
+  --color-bronze-tint: rgba(199, 154, 82, 0.16);
+
+  --color-teal: #5E7E68;
+  --color-teal-hover: #4F6C58;
+  --color-teal-tint: rgba(94, 126, 104, 0.14);
+
+  --color-coral: #7B2D42;
+  --color-coral-hover: #8E3550;
+  --color-coral-tint: rgba(123, 45, 66, 0.12);
+
+  --color-violet: #C56A85;           /* dusty mauve, darkened for light contrast */
+  --color-violet-hover: #B45775;
+  --color-violet-tint: rgba(217, 139, 160, 0.16);
+
+  --color-secondary: #FBF5F0;
+  --color-price: var(--color-primary);
+  --color-cta: var(--color-primary);
+  --color-cta-hover: var(--color-primary-hover);
+  --color-header: #FFFDFB;
+  --color-header-secondary: #FBF5F0;
+
+  --color-accent-light: var(--color-accent-tint);
+  --color-accent-2: var(--color-bronze);
+  --color-accent-2-hover: var(--color-bronze-hover);
+  --color-accent-3: var(--color-teal);
+  --color-accent-4: #7A6068;
+
+  /* Surfaces — warm blush paper */
+  --color-bg: #F7EDE9;               /* warm blush nude */
+  --color-bg-elevated: #FFFDFB;      /* warm ivory cards */
+  --color-bg-secondary: #FBF5F0;     /* champagne cream — alternating sections */
+  --color-bg-tertiary: #F3DDE2;      /* soft rose tint */
+  --color-bg-warm: #FBF5F0;
+  --color-bg-cool: #F7EDE9;
+
+  /* Text — deep plum-brown */
+  --color-text: #2E1B24;
+  --color-text-secondary: #7A6068;
+  --color-text-tertiary: #9A828B;
+  --color-text-inverse: #FFF7F9;
+
+  /* Lines — soft warm blush-grey */
+  --color-border: #EAD9D6;
+  --color-border-hover: #DCC5C1;
+  --color-border-strong: #C9ABA6;
+  --color-hairline: rgba(46, 27, 36, 0.08);
+
+  /* Status */
+  --color-success: #5E7E68;
+  --color-success-light: rgba(94, 126, 104, 0.14);
+  --color-warning: #9A7433;
+  --color-warning-light: rgba(199, 154, 82, 0.16);
+  --color-danger: #7B2D42;
+  --color-danger-light: rgba(123, 45, 66, 0.10);
+  --color-info: #C56A85;
+
+  /* Shadows — warm, soft, hairline-first */
+  --shadow-sm: 0 1px 2px rgba(46, 27, 36, 0.05);
+  --shadow-md: 0 6px 20px rgba(46, 27, 36, 0.07);
+  --shadow-lg: 0 14px 34px rgba(46, 27, 36, 0.09);
+  --shadow-xl: 0 26px 60px rgba(46, 27, 36, 0.11);
+  --shadow-card: 0 1px 2px rgba(46, 27, 36, 0.05);
+  --shadow-card-hover: 0 10px 28px rgba(123, 45, 66, 0.14);
+  --shadow-accent: 0 10px 24px rgba(123, 45, 66, 0.18);
+  --shadow-warm: 0 10px 24px rgba(199, 154, 82, 0.18);
+  --shadow-glow-amber: 0 0 24px rgba(123, 45, 66, 0.22);
+  --shadow-glow-azure: 0 0 24px rgba(197, 106, 133, 0.22);
+  --shadow-glow-violet: 0 0 24px rgba(197, 106, 133, 0.24);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #7B2D42 0%, #C56A85 100%);
+  --gradient-accent: linear-gradient(135deg, #C56A85 0%, #7B2D42 100%);
+  --gradient-warm: linear-gradient(180deg, #FFFDFB 0%, #FBF5F0 100%);
+  --gradient-cool: linear-gradient(180deg, #FBF5F0 0%, #F3DDE2 100%);
+  --gradient-hero: linear-gradient(135deg, #F7EDE9 0%, #FBF5F0 55%, #F3DDE2 100%);
+  --gradient-badge: linear-gradient(135deg, #7B2D42 0%, #C56A85 100%);
+  --gradient-mint: linear-gradient(135deg, rgba(197, 106, 133, 0.10) 0%, rgba(199, 154, 82, 0.10) 100%);
+  --gradient-sunset: linear-gradient(135deg, rgba(123, 45, 66, 0.08) 0%, rgba(199, 154, 82, 0.08) 100%);
+  --gradient-electric: linear-gradient(135deg, #7B2D42 0%, #C56A85 100%);
+  --gradient-card-hover: linear-gradient(180deg, rgba(123, 45, 66, 0.05) 0%, rgba(197, 106, 133, 0.05) 100%);
+
+  --promo-bg-blue: rgba(197, 106, 133, 0.12);
+  --promo-bg-warm: rgba(199, 154, 82, 0.10);
+  --promo-bg-green: rgba(94, 126, 104, 0.10);
+  --promo-bg-purple: rgba(123, 45, 66, 0.12);
+  --promo-bg-pink: rgba(217, 139, 160, 0.12);
+
+  color-scheme: light;
+}
+
+/* Warm-tone photo smoothing on candlelit canvas */
+:root img[src*=".jpg"],
+:root img[src*=".jpeg"],
+:root img[src*=".png"],
+:root img[src*=".webp"] {
+  filter: brightness(0.98) contrast(1.02);
+}
+
+[data-theme="light"] img[src*=".jpg"],
+[data-theme="light"] img[src*=".jpeg"],
+[data-theme="light"] img[src*=".png"],
+[data-theme="light"] img[src*=".webp"],
+.light img[src*=".jpg"],
+.light img[src*=".jpeg"],
+.light img[src*=".png"],
+.light img[src*=".webp"] {
+  filter: brightness(1.02) contrast(1.02) saturate(1.03);
+}
