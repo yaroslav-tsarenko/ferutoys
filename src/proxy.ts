@@ -5,7 +5,7 @@ import { verifyTokenEdge } from "@/lib/token-edge";
 
 const intlMiddleware = createMiddleware(routing);
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname.endsWith("/avontshop.html")) {
@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
 
     if (pathname.startsWith("/admin")) {
       if (!payload) {
-        return NextResponse.redirect(new URL("/en/auth/login", request.url));
+        return NextResponse.redirect(new URL("/auth/login", request.url));
       }
     }
 

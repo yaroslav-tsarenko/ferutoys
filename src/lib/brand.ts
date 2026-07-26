@@ -33,7 +33,7 @@ export const brand = {
     // the phone row rather than showing a placeholder number.
     phone: "",
     phoneHref: "",
-    contactPage: "/en/contact",
+    contactPage: "/contact",
   },
 
   social: {

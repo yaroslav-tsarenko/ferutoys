@@ -19,7 +19,6 @@ import { Link } from "@/i18n/routing";
 import { useAuth } from "@/providers/AuthProvider";
 import { FeruToysLogo } from "../FeruToysLogo";
 import { CurrencySwitcher } from "./CurrencySwitcher";
-import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ThemeToggle } from "./ThemeToggle";
 import { SearchBox } from "./SearchBox";
 import { DEPARTMENTS, QUICK_LINKS } from "./taxonomy";
@@ -258,8 +257,6 @@ export function MobileDrawer({
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1 rounded-full border border-[color:var(--color-border)] bg-[color:var(--color-bg-elevated)] px-1.5 py-1">
                   <CurrencySwitcher />
-                  <span className="h-4 w-px bg-[color:var(--color-border)]" aria-hidden />
-                  <LanguageSwitcher />
                 </div>
                 <div className="text-[color:var(--color-text)]">
                   <ThemeToggle />

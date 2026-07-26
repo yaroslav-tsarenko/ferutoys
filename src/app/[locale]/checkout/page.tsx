@@ -75,6 +75,8 @@ export default function CheckoutPage() {
   const [promoInput, setPromoInput] = useState("");
   const [promoError, setPromoError] = useState<string | null>(null);
   const [applyingPromo, setApplyingPromo] = useState(false);
+  const [consent, setConsent] = useState(false);
+  const [consentError, setConsentError] = useState(false);
 
   const {
     register,
@@ -168,6 +170,10 @@ export default function CheckoutPage() {
   };
 
   const onSubmit = async (data: CheckoutFormData) => {
+    if (!consent) {
+      setConsentError(true);
+      return;
+    }
     setSubmitting(true);
     try {
       const res = await fetch("/api/checkout", {
@@ -514,6 +520,34 @@ export default function CheckoutPage() {
                     </motion.div>
                   ))}
                 </div>
+
+                <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-bg-secondary)] p-4">
+                  <input
+                    type="checkbox"
+                    checked={consent}
+                    onChange={(e) => {
+                      setConsent(e.target.checked);
+                      if (e.target.checked) setConsentError(false);
+                    }}
+                    className="mt-0.5 h-4 w-4 shrink-0 accent-[color:var(--color-primary)]"
+                  />
+                  <span className="text-[13px] leading-relaxed text-[color:var(--color-text-secondary)]">
+                    I agree to the{" "}
+                    <Link href="/policies/privacy" className="font-semibold text-[color:var(--color-accent)] hover:underline">
+                      Privacy Policy
+                    </Link>{" "}
+                    and{" "}
+                    <Link href="/policies/terms" className="font-semibold text-[color:var(--color-accent)] hover:underline">
+                      Terms of Service
+                    </Link>
+                    .
+                  </span>
+                </label>
+                {consentError && (
+                  <span className={ERROR}>
+                    Please accept the Privacy Policy to place your order
+                  </span>
+                )}
 
                 <div className="mt-1 flex gap-3">
                   <Button variant="bordered" size="lg" onPress={() => setStep(1)}>

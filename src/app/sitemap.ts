@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
-import { routing } from "@/i18n/routing";
 import { siteUrl } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -33,15 +32,10 @@ function entry(
   priority: number,
 ): MetadataRoute.Sitemap[number] {
   return {
-    url: `${siteUrl}/${routing.defaultLocale}${path}`,
+    url: `${siteUrl}${path || "/"}`,
     lastModified,
     changeFrequency,
     priority,
-    alternates: {
-      languages: Object.fromEntries(
-        routing.locales.map((locale) => [locale, `${siteUrl}/${locale}${path}`]),
-      ),
-    },
   };
 }
 

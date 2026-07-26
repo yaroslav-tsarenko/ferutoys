@@ -18,19 +18,19 @@ export default function NotFound() {
           </p>
           <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
             <Link
-              href="/en"
+              href="/"
               className="inline-flex items-center gap-2 rounded-full bg-[color:var(--color-primary)] px-5 py-3 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[color:var(--color-primary-fg)] transition-all hover:bg-[color:var(--color-primary-hover)]"
             >
               Return home <ArrowRight size={13} />
             </Link>
             <Link
-              href="/en/catalog"
+              href="/catalog"
               className="inline-flex items-center gap-2 rounded-full border border-[color:var(--color-border)] px-5 py-3 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[color:var(--color-text)] transition-colors hover:border-[color:var(--color-primary)] hover:text-[color:var(--color-primary)]"
             >
               Browse catalogue
             </Link>
             <Link
-              href="/en/search"
+              href="/search"
               className="inline-flex items-center gap-2 rounded-full border border-[color:var(--color-border)] px-5 py-3 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[color:var(--color-text)] transition-colors hover:border-[color:var(--color-primary)] hover:text-[color:var(--color-primary)]"
             >
               <Search size={12} /> Search

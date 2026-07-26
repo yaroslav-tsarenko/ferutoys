@@ -48,7 +48,7 @@ async function getCategoryChain(categoryId: string): Promise<{ name: string; slu
 }
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
-  const { slug, locale } = await params;
+  const { slug } = await params;
   const product = await prisma.product.findUnique({
     where: { slug },
     select: {
@@ -71,14 +71,14 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     title,
     description,
     alternates: {
-      canonical: `/${locale}/product/${slug}`,
+      canonical: `/product/${slug}`,
       languages: localeAlternates(`/product/${slug}`),
     },
     openGraph: {
       type: "website",
       title,
       description,
-      url: `/${locale}/product/${slug}`,
+      url: `/product/${slug}`,
       images: image ? [{ url: image, alt: product.name }] : [ogImage],
     },
     twitter: { card: "summary_large_image", images: [image || ogImage.url] },
@@ -86,7 +86,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { slug, locale } = await params;
+  const { slug } = await params;
 
   const product = await prisma.product.findUnique({
     where: { slug },
@@ -125,7 +125,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     },
   });
 
-  if (!product) redirect(`/${locale}/catalog`);
+  if (!product) redirect("/catalog");
   if (product.status === "ARCHIVED") notFound();
 
   const primaryCategory = product.categories[0]?.category;
@@ -156,7 +156,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       availability: product.quantity > 0
         ? "https://schema.org/InStock"
         : "https://schema.org/OutOfStock",
-      url: `${siteUrl}/${locale}/product/${product.slug}`,
+      url: `${siteUrl}/product/${product.slug}`,
       itemCondition: "https://schema.org/NewCondition",
       seller: { "@id": `${siteUrl}/#organization` },
     },
@@ -186,7 +186,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       "@type": "ListItem",
       position: i + 1,
       name: item.label,
-      ...(item.href ? { item: `${siteUrl}/${locale}${item.href}` } : {}),
+      ...(item.href ? { item: `${siteUrl}${item.href}` } : {}),
     })),
   };
 

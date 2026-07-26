@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { toast } from "sonner";
@@ -59,13 +59,14 @@ const INPUT_PLAIN_CLASS =
 
 export default function RegisterPage() {
   const t = useTranslations("auth");
-  const locale = useLocale();
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<FormData>(initialForm);
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [consent, setConsent] = useState(false);
+  const [consentError, setConsentError] = useState(false);
 
   const strength = getPasswordStrength(form.password);
 
@@ -114,6 +115,10 @@ export default function RegisterPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateStep(3)) return;
+    if (!consent) {
+      setConsentError(true);
+      return;
+    }
 
     setLoading(true);
     try {
@@ -136,7 +141,7 @@ export default function RegisterPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Registration failed");
       toast.success("Account created!");
-      window.location.href = `/${locale}/account`;
+      window.location.href = "/account";
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Registration failed");
     } finally {
@@ -501,11 +506,29 @@ export default function RegisterPage() {
                   {renderError("confirmPassword")}
                 </div>
 
-                <p className="text-[13px] leading-relaxed text-[color:var(--color-text-tertiary)]">
-                  By creating an account, you agree to our{" "}
-                  <Link href="/policies/terms" className="text-[color:var(--color-accent)] hover:underline">Terms of Service</Link> and{" "}
-                  <Link href="/policies/privacy" className="text-[color:var(--color-accent)] hover:underline">Privacy Policy</Link>.
-                </p>
+                <div className="flex flex-col gap-1.5">
+                  <label className="flex cursor-pointer items-start gap-2.5 text-[13px] leading-relaxed text-[color:var(--color-text-secondary)]">
+                    <input
+                      type="checkbox"
+                      checked={consent}
+                      onChange={(e) => {
+                        setConsent(e.target.checked);
+                        if (e.target.checked) setConsentError(false);
+                      }}
+                      className="mt-0.5 h-4 w-4 shrink-0 accent-[color:var(--color-primary)]"
+                    />
+                    <span>
+                      I agree to the{" "}
+                      <Link href="/policies/terms" className="text-[color:var(--color-accent)] hover:underline">Terms of Service</Link> and{" "}
+                      <Link href="/policies/privacy" className="text-[color:var(--color-accent)] hover:underline">Privacy Policy</Link>.
+                    </span>
+                  </label>
+                  {consentError && (
+                    <span className="text-xs text-[color:var(--color-danger)]">
+                      You must accept the Terms of Service and Privacy Policy to continue
+                    </span>
+                  )}
+                </div>
 
                 <div className="mt-1 flex gap-3">
                   <Button type="button" variant="bordered" onPress={goBack} startContent={<ChevronLeft size={16} />}>
@@ -521,7 +544,7 @@ export default function RegisterPage() {
         </form>
 
         <p className="mt-7 text-center text-sm text-[color:var(--color-text-secondary)]">
-          {t("haveAccount")}{" "}
+          {t("hasAccount")}{" "}
           <Link href="/auth/login" className="font-semibold text-[color:var(--color-accent)] hover:opacity-80">{t("signIn")}</Link>
         </p>
       </motion.div>

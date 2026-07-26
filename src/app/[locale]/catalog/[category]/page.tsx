@@ -17,7 +17,7 @@ interface CategoryPageProps {
 }
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
-  const { category: slug, locale } = await params;
+  const { category: slug } = await params;
 
   const category = await prisma.category.findUnique({
     where: { slug },
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
       category.description ||
       `Shop ${category.name} at FeruToys — a tasteful intimacy boutique. Body-safe pleasure, wellness, lingerie and gifting, shipped in discreet packaging.`,
     alternates: {
-      canonical: `/${locale}/catalog/${category.slug}`,
+      canonical: `/catalog/${category.slug}`,
       languages: localeAlternates(`/catalog/${category.slug}`),
     },
     openGraph: {
@@ -40,14 +40,14 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
       description:
         category.description ||
         `Shop ${category.name} products at FeruToys.`,
-      url: `/${locale}/catalog/${category.slug}`,
+      url: `/catalog/${category.slug}`,
       images: [ogImage],
     },
   };
 }
 
 export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
-  const { category: slug, locale } = await params;
+  const { category: slug } = await params;
   const sp = (await searchParams) || {};
   const page = Math.max(1, parseInt(sp.page || "1", 10) || 1);
 
@@ -59,7 +59,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   // If the requested slug doesn't exist (stale hardcoded links, old promos,
   // renamed vendor category), send the shopper to the main catalogue instead
   // of hitting a dead-end 404.
-  if (!category) redirect(`/${locale}/catalog`);
+  if (!category) redirect("/catalog");
 
   const categoryIds = await getDescendantCategoryIds(category.id);
 
@@ -110,7 +110,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   }));
 
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
-  const basePath = `/${locale}/catalog/${category.slug}`;
+  const basePath = `/catalog/${category.slug}`;
 
   return (
     <div className="mx-auto w-full max-w-[var(--max-width)] px-4 pb-12 [overflow-wrap:anywhere]">

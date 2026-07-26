@@ -20,12 +20,12 @@ export const ogImage = {
 };
 
 /**
- * hreflang map for a locale-agnostic path such as "/product/foo".
- * Feeds `alternates.languages` so each locale points at its own URL.
+ * hreflang map for a path such as "/product/foo". The store is single-locale
+ * (English, no URL prefix), so each entry points at the bare path.
  */
 export function localeAlternates(path: string) {
   return Object.fromEntries(
-    routing.locales.map((locale) => [locale, `/${locale}${path}`]),
+    routing.locales.map((locale) => [locale, path || "/"]),
   );
 }
 
@@ -77,7 +77,7 @@ export function webSiteJsonLd(locale: string) {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${siteUrl}/#website`,
-    url: `${siteUrl}/${locale}`,
+    url: siteUrl,
     name: brand.displayName,
     inLanguage: locale,
     publisher: { "@id": `${siteUrl}/#organization` },
@@ -85,7 +85,7 @@ export function webSiteJsonLd(locale: string) {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${siteUrl}/${locale}/search?q={search_term_string}`,
+        urlTemplate: `${siteUrl}/search?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },

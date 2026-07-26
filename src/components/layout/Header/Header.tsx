@@ -30,7 +30,6 @@ import { brand } from "@/lib/brand";
 import { FeruToysLogo } from "../FeruToysLogo";
 import { ThemeToggle } from "./ThemeToggle";
 import { CurrencySwitcher } from "./CurrencySwitcher";
-import { LanguageSwitcher } from "./LanguageSwitcher";
 import { SearchBox } from "./SearchBox";
 import { DepartmentsMenu } from "./DepartmentsMenu";
 import { MobileDrawer } from "./MobileDrawer";
@@ -200,7 +199,6 @@ export function Header() {
                   className="hidden h-3 w-px bg-[color:var(--color-bronze)]/25 sm:block"
                 />
                 <CurrencySwitcher />
-                <LanguageSwitcher />
               </div>
             </div>
           </div>

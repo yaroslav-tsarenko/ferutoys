@@ -5,7 +5,6 @@ import { JsonLd } from "@/components/shared/SEO/JsonLd";
 import { MarketplaceHome } from "@/components/home/MarketplaceHome/MarketplaceHome";
 import { ogImage, organizationJsonLd, webSiteJsonLd } from "@/lib/seo";
 import { brand } from "@/lib/brand";
-import { routing } from "@/i18n/routing";
 import {
   getBrandSections,
   TOP_BRANDS,
@@ -20,17 +19,14 @@ interface HomePageProps {
   params: Promise<{ locale: string }>;
 }
 
-export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
-  const { locale } = await params;
-
+export async function generateMetadata(): Promise<Metadata> {
   return {
     title: { absolute: `${brand.displayName} — ${brand.tagline}` },
     description: brand.description,
     alternates: {
-      canonical: `/${locale}`,
-      languages: Object.fromEntries(routing.locales.map((l) => [l, `/${l}`])),
+      canonical: "/",
     },
-    openGraph: { url: `/${locale}`, type: "website", images: [ogImage] },
+    openGraph: { url: "/", type: "website", images: [ogImage] },
   };
 }
 
