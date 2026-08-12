@@ -41,22 +41,22 @@ import pciDssLogo from "@/assets/pci-dss-compliant-logo-vector.svg";
 // Curated collection fallback — only shown until the live category feed loads.
 // Points are consistent with the /catalog/... scheme used across the app.
 const fallbackCollectionLinks = [
-  { href: "/catalog/for-her",     label: "For Her" },
-  { href: "/catalog/for-him",     label: "For Him" },
-  { href: "/catalog/for-couples", label: "For Couples" },
-  { href: "/catalog/wellness",    label: "Wellness & Self-care" },
-  { href: "/catalog/lingerie",    label: "Lingerie" },
-  { href: "/catalog/lubricants",  label: "Lubricants & Essentials" },
-  { href: "/catalog/gifting",     label: "Gifting" },
-  { href: "/catalog?sort=new",    label: "New In" },
+  { href: "/catalog/erotic-toys-vibrators-17172",                        label: "Vibrators" },
+  { href: "/catalog/erotic-toys-dildos-17143",                           label: "Dildos" },
+  { href: "/catalog/erotic-toys-anal-toys-17151",                        label: "Anal Play" },
+  { href: "/catalog/vibrators-couple-vibrators-17178",                   label: "Couples' Toys" },
+  { href: "/catalog/erotic-clothing-women-s-erotic-clothing-23422-23422", label: "Lingerie & Apparel" },
+  { href: "/catalog/sex-and-sensuality-bondage-20455",                   label: "Sensual Play" },
+  { href: "/catalog/care-and-stimulation-lubricants-licks-17103",        label: "Lubricants & Essentials" },
+  { href: "/catalog/erotic-toys-kits-17158",                             label: "Gifting & Sets" },
 ];
 
 const wellnessLinks = [
-  { href: "/blog",              label: "The Journal" },
-  { href: "/guides",            label: "Guides & how-to" },
-  { href: "/guides/getting-started", label: "New to this? Start here" },
-  { href: "/wellness",          label: "Body-safe & wellness" },
-  { href: "/faq",               label: "Questions, answered" },
+  { href: "/catalog/erotic-toys-kits-17158",                    label: "New to this? Start here" },
+  { href: "/catalog/sex-and-sensuality-care-and-stimulation-17094", label: "Body-safe & wellness" },
+  { href: "/catalog?sort=popular",                              label: "Best sellers" },
+  { href: "/catalog?sort=newest",                               label: "New in" },
+  { href: "/catalog?onSale=true",                               label: "Deals & offers" },
 ];
 
 const customerCareLinks = [
@@ -168,8 +168,11 @@ export function Footer() {
       .catch(() => {});
   }, []);
 
+  // The live feed exposes a single root department, which would collapse the
+  // collection column to one link — fall back to the curated multi-collection
+  // list unless the feed genuinely returns several distinct categories.
   const collectionLinks =
-    liveCategories.length > 0
+    liveCategories.length > 1
       ? liveCategories.slice(0, 8).map((c) => ({
           href: `/catalog/${c.slug}`,
           label: c.name,
@@ -346,41 +349,47 @@ export function Footer() {
           </div>
 
           {/* Payments + social */}
-          <div className="flex flex-wrap items-center gap-2">
-            {[
-              { src: visaLogo, alt: "Visa", height: 20 },
-              { src: mastercardLogo, alt: "Mastercard", height: 18 },
-              { src: pciDssLogo, alt: "PCI DSS Compliant", height: 24 },
-            ].map(({ src, alt, height }) => (
-              <span
-                key={alt}
-                className="inline-flex h-9 items-center rounded-lg bg-[#F4EFE8] px-3"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={src.src}
-                  alt={alt}
-                  style={{ height, width: "auto", maxWidth: "none", display: "inline-block" }}
-                  className="shrink-0"
-                />
+          <div className="flex flex-col gap-3">
+            {/* Row 1 — payment badges + SSL */}
+            <div className="flex flex-wrap items-center gap-2">
+              {[
+                { src: visaLogo, alt: "Visa", maxH: 20 },
+                { src: mastercardLogo, alt: "Mastercard", maxH: 20 },
+                { src: pciDssLogo, alt: "PCI DSS Compliant", maxH: 30 },
+              ].map(({ src, alt, maxH }) => (
+                <span
+                  key={alt}
+                  className="inline-flex h-9 w-14 shrink-0 items-center justify-center rounded-lg bg-[#F4EFE8] px-2"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={src.src}
+                    alt={alt}
+                    style={{ maxHeight: maxH, maxWidth: "100%", width: "auto", objectFit: "contain" }}
+                  />
+                </span>
+              ))}
+              <span className="inline-flex h-9 items-center gap-1.5 rounded-full border border-[color:var(--color-bronze)]/25 px-3 text-[11px] text-[color:var(--color-text)]/80">
+                <ShieldCheck size={12} aria-hidden className="text-[color:var(--color-teal,var(--color-success))]" />
+                256-bit SSL
               </span>
-            ))}
-            <span className="inline-flex h-9 items-center gap-1.5 rounded-full border border-[color:var(--color-bronze)]/25 px-3 text-[11px] text-[color:var(--color-text)]/80">
-              <ShieldCheck size={12} aria-hidden className="text-[color:var(--color-teal,var(--color-success))]" />
-              256-bit SSL
-            </span>
-            {socialLinks.map(({ icon: Icon, label, href }) => (
-              <a
-                key={label}
-                href={href}
-                aria-label={label}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--color-bronze)]/25 text-[color:var(--color-text)]/80 transition-all hover:border-[color:var(--color-bronze)] hover:text-[color:var(--color-bronze)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-bronze)]/40"
-              >
-                <Icon size={14} aria-hidden />
-              </a>
-            ))}
+            </div>
+
+            {/* Row 2 — social links */}
+            <div className="flex flex-wrap items-center gap-2">
+              {socialLinks.map(({ icon: Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--color-bronze)]/25 text-[color:var(--color-text)]/80 transition-all hover:border-[color:var(--color-bronze)] hover:text-[color:var(--color-bronze)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-bronze)]/40"
+                >
+                  <Icon size={14} aria-hidden />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -399,7 +408,7 @@ export function Footer() {
           <div className="flex flex-col gap-2.5 md:items-end">
             <div className="inline-flex items-center gap-2 rounded-full border border-[color:var(--color-bronze)]/25 px-3.5 py-1.5 text-[11px] text-[color:var(--color-text)]/80">
               <Globe size={12} aria-hidden className="text-[color:var(--color-bronze)]" />
-              <span>Estonia · English · {currency} {symbol}</span>
+              <span>English · {currency} {symbol}</span>
             </div>
             <nav aria-label="Legal" className="flex flex-wrap items-center gap-4">
               {legalLinks.map((link) => (

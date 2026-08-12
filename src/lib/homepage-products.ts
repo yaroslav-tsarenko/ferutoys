@@ -80,6 +80,7 @@ export interface CategorySection {
 export interface CategoryTab {
   label: string;
   slugs: string[];
+  products?: HomepageProduct[];
 }
 
 function collectCategorySlugs(category: HomepageCategory): string[] {

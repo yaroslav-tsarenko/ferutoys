@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     q: "What payment methods do you accept?",
-    a: "We accept Visa, Mastercard, American Express, PayPal, and bank transfers. All payments are processed securely with SSL encryption.",
+    a: "We accept Visa and Mastercard. All payments are processed securely with SSL encryption.",
   },
   {
     q: "Can I change or cancel my order?",

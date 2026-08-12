@@ -23,6 +23,7 @@ interface Product {
 interface TabInput {
   label: string;
   slugs: string[];
+  products?: Product[];
 }
 
 interface Props {
@@ -64,6 +65,9 @@ export function ProductSection({
     if (normalizedTabs.length === 0 || activeTab === 0) return products;
     const tab = normalizedTabs[activeTab];
     if (!tab) return products;
+    // Prefer server-provided per-tab products (guarantees switching a tab
+    // shows genuinely different items) and fall back to client filtering.
+    if (tab.products && tab.products.length > 0) return tab.products;
     const slugSet = new Set(tab.slugs);
     if (slugSet.size > 0) {
       const matched = products.filter((p) =>

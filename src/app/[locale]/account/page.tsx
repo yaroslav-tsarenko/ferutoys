@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { Chip } from "@/components/ui/Chip";
-import { Package, MapPin, Heart, User as UserIcon, ChevronRight } from "lucide-react";
+import { Package, ChevronRight } from "lucide-react";
 import { useAuth } from "@/providers/AuthProvider";
 import { useCurrency } from "@/providers/CurrencyProvider";
 import { LoadingSpinner } from "@/components/shared/LoadingSpinner/LoadingSpinner";
@@ -78,7 +78,7 @@ export default function AccountPage() {
         </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-[2fr_1fr]">
+      <div className="mt-6">
         <div>
           <div className="mb-3 flex items-center justify-between">
             <h2 className="font-serif text-xl font-medium tracking-tight text-[color:var(--color-text)]">Recent Orders</h2>
@@ -114,30 +114,6 @@ export default function AccountPage() {
               ))}
             </div>
           )}
-        </div>
-
-        <div className="rounded-2xl border border-[color:var(--color-line)] bg-[color:var(--color-bg-elevated)] p-5">
-          <h2 className="mb-3 font-serif text-xl font-medium tracking-tight text-[color:var(--color-text)]">Quick Links</h2>
-          <Link href="/account/orders" className="flex items-center gap-3 rounded-lg px-2 py-3 text-sm text-[color:var(--color-text)] transition-colors hover:bg-[color:var(--color-bg-secondary)]">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[color:var(--color-primary-tint)] text-[color:var(--color-primary)]"><Package size={16} strokeWidth={1.5} /></span>
-            <span className="flex-1">{t("orders")}</span>
-            <ChevronRight size={16} className="text-[color:var(--color-text-tertiary)]" />
-          </Link>
-          <Link href="/account/profile" className="flex items-center gap-3 rounded-lg px-2 py-3 text-sm text-[color:var(--color-text)] transition-colors hover:bg-[color:var(--color-bg-secondary)]">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[color:var(--color-primary-tint)] text-[color:var(--color-primary)]"><UserIcon size={16} strokeWidth={1.5} /></span>
-            <span className="flex-1">{t("profile")}</span>
-            <ChevronRight size={16} className="text-[color:var(--color-text-tertiary)]" />
-          </Link>
-          <Link href="/account/addresses" className="flex items-center gap-3 rounded-lg px-2 py-3 text-sm text-[color:var(--color-text)] transition-colors hover:bg-[color:var(--color-bg-secondary)]">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[color:var(--color-primary-tint)] text-[color:var(--color-primary)]"><MapPin size={16} strokeWidth={1.5} /></span>
-            <span className="flex-1">{t("addresses")}</span>
-            <ChevronRight size={16} className="text-[color:var(--color-text-tertiary)]" />
-          </Link>
-          <Link href="/account/wishlist" className="flex items-center gap-3 rounded-lg px-2 py-3 text-sm text-[color:var(--color-text)] transition-colors hover:bg-[color:var(--color-bg-secondary)]">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[color:var(--color-primary-tint)] text-[color:var(--color-primary)]"><Heart size={16} strokeWidth={1.5} /></span>
-            <span className="flex-1">{t("wishlist")}</span>
-            <ChevronRight size={16} className="text-[color:var(--color-text-tertiary)]" />
-          </Link>
         </div>
       </div>
     </div>

@@ -23,11 +23,11 @@ interface Props {
 }
 
 const defaultItems: PromoItem[] = [
-  { id: "1", icon: "Truck", title: "Free delivery", subtitle: "Orders over £100" },
-  { id: "2", icon: "RotateCcw", title: "Easy returns", subtitle: "14-day policy" },
-  { id: "3", icon: "Shield", title: "2-year warranty", subtitle: "On all products" },
-  { id: "4", icon: "Award", title: "Premium quality", subtitle: "Certified goods" },
-  { id: "5", icon: "Headphones", title: "24/7 support", subtitle: "Always here" },
+  { id: "1", icon: "Truck", title: "Free delivery", subtitle: "Orders over €100" },
+  { id: "2", icon: "Package", title: "Discreet packaging", subtitle: "Plain & unmarked" },
+  { id: "3", icon: "RotateCcw", title: "Easy returns", subtitle: "30-day policy" },
+  { id: "4", icon: "Heart", title: "Body-safe", subtitle: "Trusted brands" },
+  { id: "5", icon: "Headphones", title: "Caring support", subtitle: "Always here" },
 ];
 
 export function PromoStrip({ items }: Props) {

@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { generateInvoicePdf, invoiceFileName } from "./invoice-pdf";
 
 let resend: Resend | null = null;
 
@@ -30,14 +31,20 @@ const BG_COLOR = "#f7f7f7";
 const TEXT_COLOR = "#1A1A2E";
 const MUTED_COLOR = "#666";
 
+interface EmailAttachment {
+  filename: string;
+  content: Buffer;
+}
+
 interface SendArgs {
   to: string;
   subject: string;
   html: string;
   replyTo?: string;
+  attachments?: EmailAttachment[];
 }
 
-async function send({ to, subject, html, replyTo }: SendArgs): Promise<boolean> {
+async function send({ to, subject, html, replyTo, attachments }: SendArgs): Promise<boolean> {
   const r = getResend();
   if (!r) {
     console.log(`[Email] Skipped (Resend not configured) → ${subject} to ${to}`);
@@ -50,6 +57,7 @@ async function send({ to, subject, html, replyTo }: SendArgs): Promise<boolean> 
       subject,
       html,
       replyTo: replyTo ?? getReplyTo(),
+      attachments,
     });
     if (error) {
       console.error(`[Email] Send failed → ${subject} to ${to}:`, error);
@@ -350,9 +358,18 @@ export async function sendOrderInvoiceEmail(data: OrderEmailData): Promise<boole
   const id = shortId(data);
   const date = formatDate(data.createdAt);
 
+  let attachments: EmailAttachment[] | undefined;
+  try {
+    const pdfBytes = await generateInvoicePdf(data);
+    attachments = [{ filename: invoiceFileName(data), content: Buffer.from(pdfBytes) }];
+  } catch (err) {
+    console.error(`[Email] Invoice PDF generation failed for #${id}:`, err);
+  }
+
   return send({
     to: data.customerEmail,
     subject: `Invoice — Order #${id}`,
+    attachments,
     html: emailWrapper(
       `
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;border-bottom:2px solid #e5e5e5;padding-bottom:16px;">

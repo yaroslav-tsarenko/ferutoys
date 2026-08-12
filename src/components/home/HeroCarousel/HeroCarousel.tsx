@@ -237,10 +237,10 @@ export function HeroCarousel({ slides, deals, products }: Props) {
                 />
               </Link>
               <Link
-                href="/catalog/wellness"
+                href="/catalog"
                 className="inline-flex items-center gap-2 rounded-full border border-[rgba(246,236,236,0.28)] bg-[rgba(20,12,16,0.35)] px-7 py-4 text-[14.5px] font-semibold text-[#F6ECEC] backdrop-blur-sm transition-colors hover:border-[color:var(--color-primary-hover)] hover:text-[color:var(--color-primary-hover)]"
               >
-                Read the wellness guides
+                Browse the catalog
               </Link>
             </motion.div>
           </div>

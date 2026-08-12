@@ -5,10 +5,10 @@ import { motion, useInView } from "framer-motion";
 import { CheckCircle2, Sparkles, ShieldCheck, Truck } from "lucide-react";
 
 const bullets = [
-  "Same-day dispatch on orders placed before 14:00 GMT",
-  "Free EU returns within 30 days, no questions asked",
-  "Manufacturer-certified inventory with batch traceability",
-  "Bulk pricing tiers automatically applied at checkout",
+  "Plain, discreet packaging with no branding on the outside",
+  "Free EU returns within 30 days on unopened items",
+  "Only body-safe materials from trusted, vetted brands",
+  "Private, secure checkout — your details stay confidential",
 ];
 
 export function ServicePromise() {
@@ -28,11 +28,11 @@ export function ServicePromise() {
             <Sparkles size={14} /> Our service promise
           </span>
           <h2 className="font-serif text-3xl font-medium leading-tight tracking-tight text-[color:var(--color-text)] sm:text-[40px]">
-            Built for professionals who can&apos;t afford to wait.
+            Shopping intimacy should feel easy and private.
           </h2>
           <p className="max-w-lg text-base leading-relaxed text-[color:var(--color-text-secondary)]">
-            Every order at FeruToys is handled by a team that knows what an installer
-            needs on a Monday morning. Spec-correct, certified, and out the door fast.
+            Every order at FeruToys is packed discreetly and shipped with care. Body-safe,
+            thoughtfully chosen, and handled with complete confidentiality.
           </p>
           <ul className="mt-2 flex flex-col gap-3">
             {bullets.map((b, i) => (

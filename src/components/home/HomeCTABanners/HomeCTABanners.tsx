@@ -8,7 +8,7 @@ const cards = [
   {
     icon: Package,
     title: "See our full range",
-    subtitle: "Browse the entire catalog of electrical materials and supplies.",
+    subtitle: "Browse the entire collection of intimacy and wellness essentials.",
     cta: "Shop catalog",
     href: "/catalog",
     tone: "primary" as const,

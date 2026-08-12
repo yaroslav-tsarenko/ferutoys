@@ -11,13 +11,13 @@ const reasons = [
   },
   {
     icon: Zap,
-    title: "Fast delivery",
-    desc: "Free shipping on orders over £100 with express options available.",
+    title: "Fast, discreet delivery",
+    desc: "Free shipping on orders over €100, sent in plain, unmarked packaging.",
   },
   {
     icon: Heart,
-    title: "Certified products",
-    desc: "Every electrical material is sourced from certified manufacturers and meets professional standards.",
+    title: "Body-safe products",
+    desc: "Every product is body-safe and sourced from trusted, vetted brands you can rely on.",
   },
   {
     icon: RefreshCw,
@@ -46,7 +46,7 @@ export function WhyShopWithUs() {
             Why choose FeruToys
           </h2>
           <p className="max-w-xl text-sm text-[color:var(--color-text-secondary)]">
-            Professional-grade electrical materials with expert support and fast delivery.
+            Body-safe intimacy essentials with discreet delivery and caring support.
           </p>
         </div>
 

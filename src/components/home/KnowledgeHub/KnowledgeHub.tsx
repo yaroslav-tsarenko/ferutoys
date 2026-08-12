@@ -9,23 +9,23 @@ const articles = [
   {
     icon: BookOpen,
     eyebrow: "Guide",
-    title: "How to size a cable for a 32 A circuit",
-    desc: "Cross-sections, voltage drop, and what the latest IEC 60364 says about derating in conduit.",
-    href: "/about",
-  },
-  {
-    icon: Calculator,
-    eyebrow: "Tool",
-    title: "Distribution board planner",
-    desc: "Pick a panel layout, count breakers, and we'll auto-suggest spare slots and DIN-rail width.",
-    href: "/about",
+    title: "Choosing your first toy",
+    desc: "A gentle, judgement-free starting point — what to look for and where to begin with confidence.",
+    href: "/catalog/erotic-toys-kits-17158",
   },
   {
     icon: FileText,
     eyebrow: "Reference",
-    title: "RCD vs RCBO: a 60-second cheat sheet",
-    desc: "Where each one fits in a residential installation — and why we ship more RCBOs every year.",
-    href: "/about",
+    title: "Body-safe materials, explained",
+    desc: "Silicone, glass and steel — how to read materials so what you buy is always safe for your body.",
+    href: "/catalog?search=body-safe",
+  },
+  {
+    icon: Calculator,
+    eyebrow: "Care",
+    title: "Cleaning & caring for your pieces",
+    desc: "Simple aftercare that keeps everything hygienic and lasting — plus the cleaners we recommend.",
+    href: "/catalog/care-and-stimulation-clean-care-23420",
   },
 ];
 
@@ -42,14 +42,14 @@ export function KnowledgeHub() {
             Resources to help you spec right
           </h2>
           <p className="text-sm text-[color:var(--color-text-secondary)]">
-            Practical guides and tools from our in-house electrical engineers.
+            Warm, practical guidance to help you shop with confidence and care.
           </p>
         </div>
         <Link
-          href="/about"
+          href="/catalog"
           className="inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--color-primary)] transition-colors hover:text-[color:var(--color-primary-hover)]"
         >
-          Browse all resources <ArrowUpRight size={16} />
+          Browse the catalog <ArrowUpRight size={16} />
         </Link>
       </div>
 

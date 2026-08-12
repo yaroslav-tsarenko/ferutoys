@@ -24,9 +24,9 @@ interface Props {
 const defaultWide: BannerData[] = [
   {
     id: "w1",
-    badgeText: "Pro Account",
+    badgeText: "Members",
     title: "Register & Get 10% Off Your First Order",
-    subtitle: "Free shipping over £100, trade pricing, and priority support",
+    subtitle: "Free shipping over €100, discreet delivery, and priority support",
     bgColor: "",
     textColor: "",
     linkUrl: "/auth/register",

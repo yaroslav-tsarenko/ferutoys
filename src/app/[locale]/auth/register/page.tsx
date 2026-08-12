@@ -71,7 +71,7 @@ export default function RegisterPage() {
   const strength = getPasswordStrength(form.password);
 
   const selectedCountry = COUNTRIES.find((c) => c.code === form.country);
-  const phoneHint = selectedCountry ? selectedCountry.phone : "+44";
+  const phoneHint = selectedCountry ? selectedCountry.phone : "+372";
 
   const set = (field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [field]: e.target.value }));

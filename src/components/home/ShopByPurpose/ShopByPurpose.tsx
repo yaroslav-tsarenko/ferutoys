@@ -3,44 +3,44 @@
 import { useRef } from "react";
 import { Link } from "@/i18n/routing";
 import { motion, useInView } from "framer-motion";
-import { Building2, Home, Factory, Lightbulb, ShieldCheck, Wrench, ArrowRight } from "lucide-react";
+import { Sparkles, HeartHandshake, Zap, Feather, Shirt, Droplets, ArrowRight } from "lucide-react";
 
 const purposes = [
   {
-    icon: Home,
-    title: "Residential",
-    desc: "Switches, sockets, lighting and household wiring kits.",
-    href: "/catalog?purpose=residential",
+    icon: Sparkles,
+    title: "For beginners",
+    desc: "Gentle, curated gift sets and starter kits to explore with confidence.",
+    href: "/catalog/erotic-toys-kits-17158",
   },
   {
-    icon: Building2,
-    title: "Commercial",
-    desc: "Distribution boards, smart panels and energy meters.",
-    href: "/catalog?purpose=commercial",
+    icon: HeartHandshake,
+    title: "For couples",
+    desc: "Tender pieces to share — couples' toys, rings and remote-control play.",
+    href: "/catalog/vibrators-couple-vibrators-17178",
   },
   {
-    icon: Factory,
-    title: "Industrial",
-    desc: "High-current cables, motor protection and PLC accessories.",
-    href: "/catalog?purpose=industrial",
+    icon: Zap,
+    title: "Solo pleasure",
+    desc: "Whisper-quiet vibrators and body-safe favourites, just for you.",
+    href: "/catalog/erotic-toys-vibrators-17172",
   },
   {
-    icon: Lightbulb,
-    title: "Lighting",
-    desc: "LED fixtures, drivers, dimmers and outdoor luminaires.",
-    href: "/catalog?purpose=lighting",
+    icon: Feather,
+    title: "Sensual play",
+    desc: "Feather-light teasing to considered restraint — tasteful and consensual.",
+    href: "/catalog/sex-and-sensuality-bondage-20455",
   },
   {
-    icon: ShieldCheck,
-    title: "Protection",
-    desc: "RCDs, MCBs, fuses, surge protection devices.",
-    href: "/catalog?purpose=protection",
+    icon: Shirt,
+    title: "Lingerie & apparel",
+    desc: "Silk, lace and soft tailoring in inclusive sizing, made to feel like you.",
+    href: "/catalog/erotic-clothing-women-s-erotic-clothing-23422-23422",
   },
   {
-    icon: Wrench,
-    title: "Tools & accessories",
-    desc: "Conduit, mounting, terminals, professional hand tools.",
-    href: "/catalog?purpose=tools",
+    icon: Droplets,
+    title: "Wellness & care",
+    desc: "Body-safe lubricants, toy cleaners and the quiet heroes of every drawer.",
+    href: "/catalog/care-and-stimulation-lubricants-licks-17103",
   },
 ];
 
@@ -58,7 +58,7 @@ export function ShopByPurpose() {
           </h2>
         </div>
         <p className="max-w-lg text-sm text-[color:var(--color-text-secondary)]">
-          Six tailored entry points into the catalog — every product is filtered, spec-matched, and ready to install.
+          Six tailored ways into the collection — whoever you are and whatever you&apos;re looking for.
         </p>
       </div>
 

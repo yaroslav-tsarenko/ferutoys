@@ -2,18 +2,32 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Package, Users, Truck, Globe2 } from "lucide-react";
+import { Package, PackageOpen, Truck, Globe2 } from "lucide-react";
 
-const stats = [
-  { icon: Package, value: "12k+", label: "Products in catalog" },
-  { icon: Users, value: "48k+", label: "Happy customers" },
-  { icon: Truck, value: "98%", label: "On-time delivery" },
-  { icon: Globe2, value: "26", label: "Countries served" },
-];
+interface Props {
+  productCount?: number;
+}
 
-export function StatsBand() {
+function formatCount(count?: number): string {
+  if (!count || count <= 0) return "1000+";
+  if (count >= 1000) {
+    const thousands = Math.floor(count / 1000);
+    return `${thousands}k+`;
+  }
+  const hundreds = Math.floor(count / 100) * 100;
+  return `${hundreds}+`;
+}
+
+export function StatsBand({ productCount }: Props) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
+
+  const stats = [
+    { icon: Package, value: formatCount(productCount), label: "Products in catalog" },
+    { icon: PackageOpen, value: "100%", label: "Discreet, unmarked parcels" },
+    { icon: Truck, value: "98%", label: "On-time delivery" },
+    { icon: Globe2, value: "26", label: "Countries served" },
+  ];
 
   return (
     <section ref={ref} className="rounded-3xl border border-[color:var(--color-line)] bg-[color:var(--color-bg-secondary)] px-6 py-8 sm:px-10 sm:py-10">

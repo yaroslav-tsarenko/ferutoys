@@ -309,66 +309,68 @@ export function ProductInfo({
       </div>
 
       {/* CTAs */}
-      <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-        <QuantitySelector
-          quantity={qty}
-          maxQuantity={stockQuantity}
-          onChange={setQty}
-        />
-        <Button
-          color="primary"
-          size="lg"
-          onPress={handleAddToCart}
-          isDisabled={outOfStock}
-          startContent={
-            <AnimatePresence mode="wait">
-              {addedFlash ? (
-                <motion.span
-                  key="ok"
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.5, opacity: 0 }}
-                >
-                  <Check size={18} strokeWidth={2.5} />
-                </motion.span>
-              ) : (
-                <motion.span
-                  key="cart"
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.5, opacity: 0 }}
-                >
-                  <ShoppingCart size={18} />
-                </motion.span>
-              )}
-            </AnimatePresence>
-          }
-          className="flex-1 !font-mono !text-[12px] !font-semibold !uppercase !tracking-[0.14em] shadow-[0_0_0_transparent] transition-shadow hover:shadow-[0_0_24px_var(--color-primary-tint)]"
-        >
-          {addedFlash
-            ? "Added"
-            : selectedWarranty > 0
-              ? t("addToCartWithWarranty")
-              : t("addToCart")}
-        </Button>
+      <div className="flex flex-col gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <QuantitySelector
+            quantity={qty}
+            maxQuantity={stockQuantity}
+            onChange={setQty}
+          />
+          <Button
+            color="primary"
+            size="lg"
+            onPress={handleAddToCart}
+            isDisabled={outOfStock}
+            startContent={
+              <AnimatePresence mode="wait">
+                {addedFlash ? (
+                  <motion.span
+                    key="ok"
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.5, opacity: 0 }}
+                  >
+                    <Check size={18} strokeWidth={2.5} />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="cart"
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.5, opacity: 0 }}
+                  >
+                    <ShoppingCart size={18} />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            }
+            className="min-w-0 flex-1 !font-mono !text-[12px] !font-semibold !uppercase !tracking-[0.14em] shadow-[0_0_0_transparent] transition-shadow hover:shadow-[0_0_24px_var(--color-primary-tint)]"
+          >
+            {addedFlash
+              ? "Added"
+              : selectedWarranty > 0
+                ? t("addToCartWithWarranty")
+                : t("addToCart")}
+          </Button>
+          <Button
+            isIconOnly
+            variant="bordered"
+            size="lg"
+            onPress={handleWishlist}
+            aria-label={t("addToWishlist")}
+            className="shrink-0 !border-[color:var(--color-line)] transition-colors hover:!border-[color:var(--color-primary)] hover:!text-[color:var(--color-primary)]"
+          >
+            <Heart size={18} />
+          </Button>
+        </div>
         <Button
           size="lg"
           onPress={handleBuyNow}
           isDisabled={outOfStock}
           startContent={<Zap size={16} />}
-          className="!bg-[color:var(--color-text)] !font-mono !text-[12px] !font-semibold !uppercase !tracking-[0.14em] !text-[color:var(--color-bg)] transition-opacity hover:opacity-85"
+          className="w-full !bg-[color:var(--color-text)] !font-mono !text-[12px] !font-semibold !uppercase !tracking-[0.14em] !text-[color:var(--color-bg)] transition-opacity hover:opacity-85"
         >
           {t("buyNow")}
-        </Button>
-        <Button
-          isIconOnly
-          variant="bordered"
-          size="lg"
-          onPress={handleWishlist}
-          aria-label={t("addToWishlist")}
-          className="!border-[color:var(--color-line)] transition-colors hover:!border-[color:var(--color-primary)] hover:!text-[color:var(--color-primary)]"
-        >
-          <Heart size={18} />
         </Button>
       </div>
 

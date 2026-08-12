@@ -5,19 +5,18 @@ import { Link } from "@/i18n/routing";
 import { motion, useInView } from "framer-motion";
 import {
   Package,
-  Headphones,
-  Laptop2,
-  Smartphone,
-  Tv,
-  Camera,
-  Gamepad2,
-  Watch,
-  Cable,
-  Printer,
+  Sparkles,
   Zap,
-  Cpu,
-  Refrigerator,
-  Lightbulb,
+  Gem,
+  Flame,
+  HeartHandshake,
+  Shirt,
+  Feather,
+  Droplets,
+  Leaf,
+  Gift,
+  Heart,
+  ArrowRight,
 } from "lucide-react";
 
 interface CategoryItem {
@@ -41,20 +40,17 @@ const CATEGORY_HINTS: Array<{
   icon: React.ElementType;
   accent: string;
 }> = [
-  { match: /audio|headphone|speaker|hi-?fi|sound|beat|dolby/, icon: Headphones, accent: "#E8A13A" },
-  { match: /laptop|notebook|macbook|chromebook|ultrabook/, icon: Laptop2, accent: "#3B82F6" },
-  { match: /pc|desktop|computer|workstation|server|tower/, icon: Cpu, accent: "#6366F1" },
-  { match: /monitor|display|screen|panel/, icon: Cpu, accent: "#0EA5E9" },
-  { match: /phone|smartphone|mobile|iphone|pixel|galaxy/, icon: Smartphone, accent: "#F59E0B" },
-  { match: /tv|video|projector|television|oled|qled/, icon: Tv, accent: "#10B981" },
-  { match: /camera|photo|drone|lens|mirrorless|dslr|gopro/, icon: Camera, accent: "#EF4444" },
-  { match: /home|smart-?home|light|lamp|led|voice|alexa|matter|thread/, icon: Lightbulb, accent: "#F59E0B" },
-  { match: /game|gaming|console|playstation|xbox|nintendo|switch|vr/, icon: Gamepad2, accent: "#8B5CF6" },
-  { match: /watch|wearable|band|fit|smartwatch|garmin/, icon: Watch, accent: "#EC4899" },
-  { match: /print|scan|copy|toner|ink|printer/, icon: Printer, accent: "#64748B" },
-  { match: /kitchen|fridge|refriger|freezer|washer|oven|dishwasher/, icon: Refrigerator, accent: "#0891B2" },
-  { match: /cable|charger|adapter|accessor|case|power|usb|hub|dock/, icon: Cable, accent: "#F97316" },
-  { match: /electrical|wiring|installation|voltage|amp|battery/, icon: Zap, accent: "#EAB308" },
+  { match: /vibrator|vibe|bullet|wand|massager/, icon: Zap, accent: "#C0399B" },
+  { match: /dildo|glass|ceramic|realistic/, icon: Gem, accent: "#8B5CF6" },
+  { match: /anal|plug|prostate|bead/, icon: Flame, accent: "#EF4444" },
+  { match: /couple|ring|partner/, icon: HeartHandshake, accent: "#EC4899" },
+  { match: /clothing|lingerie|hosiery|apparel|costume|latex|leather/, icon: Shirt, accent: "#B84A7A" },
+  { match: /bondage|slap|tickle|restraint|sensual|feather|impact/, icon: Feather, accent: "#7C3AED" },
+  { match: /lube|lubricant|care|clean|hygiene|stimulation/, icon: Droplets, accent: "#0EA5E9" },
+  { match: /wellbeing|massage|wellness|self-?care|contracept|safe-?sex/, icon: Leaf, accent: "#10B981" },
+  { match: /kit|set|gift|bundle|box/, icon: Gift, accent: "#E8A13A" },
+  { match: /furniture|machine|equipment/, icon: Sparkles, accent: "#F59E0B" },
+  { match: /toy|erotic|sensuality|pleasure|intimate/, icon: Heart, accent: "#D4437E" },
 ];
 
 function pickHint(slug: string, name: string) {
@@ -76,15 +72,23 @@ export function CategoryShowcase({ categories }: Props) {
   return (
     <section ref={ref}>
       <motion.div
-        className="mb-8 flex flex-col gap-1 border-b border-[color:var(--color-line)] pb-6"
+        className="mb-8 flex flex-wrap items-end justify-between gap-4 border-b border-[color:var(--color-line)] pb-6"
         initial={{ opacity: 0, y: 16 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5 }}
       >
-        <span className="eyebrow">Departments</span>
-        <h2 className="font-serif text-3xl font-medium tracking-tight text-[color:var(--color-text)] sm:text-[40px]">
-          Shop by category
-        </h2>
+        <div className="flex flex-col gap-1">
+          <span className="eyebrow">Departments</span>
+          <h2 className="font-serif text-3xl font-medium tracking-tight text-[color:var(--color-text)] sm:text-[40px]">
+            Shop by category
+          </h2>
+        </div>
+        <Link
+          href="/catalog"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--color-primary)] transition-colors hover:text-[color:var(--color-primary-hover)]"
+        >
+          View all categories <ArrowRight size={16} />
+        </Link>
       </motion.div>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {categories.map((cat, i) => {

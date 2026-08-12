@@ -5,10 +5,10 @@ import { Truck, ShieldCheck, RotateCcw, Headphones } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 
 const items = [
-  { icon: Truck, label: "Free shipping", desc: "On orders over £100" },
-  { icon: ShieldCheck, label: "Secure payment", desc: "100% protected checkout" },
-  { icon: RotateCcw, label: "Easy returns", desc: "14-day return policy" },
-  { icon: Headphones, label: "24/7 support", desc: "We're always here to help" },
+  { icon: Truck, label: "Free shipping", desc: "On orders over €100" },
+  { icon: ShieldCheck, label: "Discreet & secure", desc: "Plain packaging, private checkout" },
+  { icon: RotateCcw, label: "Easy returns", desc: "30-day return policy" },
+  { icon: Headphones, label: "Caring support", desc: "We're always here to help" },
 ];
 
 export function TrustStrip() {

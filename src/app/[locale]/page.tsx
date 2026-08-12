@@ -199,6 +199,7 @@ async function getHomeData() {
       newRows,
       popularRows,
       brandRows,
+      activeProductCount,
     ] = await Promise.all([
       prisma.banner.findMany({ where: { isActive: true, type: "HERO" }, orderBy: { sortOrder: "asc" } }),
       prisma.banner.findMany({ where: { isActive: true, type: "DEAL_CARD" }, orderBy: { sortOrder: "asc" } }),
@@ -224,7 +225,7 @@ async function getHomeData() {
       fetchProducts({
         where: { status: "ACTIVE", images: { some: {} } },
         orderBy: { createdAt: "desc" },
-        take: 10,
+        take: 48,
       }),
       fetchProducts({
         where: { status: "ACTIVE", images: { some: {} } },
@@ -236,6 +237,7 @@ async function getHomeData() {
         orderBy: { createdAt: "desc" },
         take: 120,
       }),
+      prisma.product.count({ where: { status: "ACTIVE", images: { some: {} } } }),
     ]);
 
     const categoryTree = buildCategoryTree(categoriesFlat, countsMap);
@@ -262,30 +264,62 @@ async function getHomeData() {
           orderBy: { createdAt: "desc" },
           take: 10,
         });
-        return { node, items };
+
+        // Fetch products for each subcategory tab separately so switching a
+        // tab shows genuinely different products (a client-side filter over a
+        // single 10-item list can't do this reliably).
+        const tabChildren = node.children.filter((c) => c.descendantProductCount > 0);
+        const tabProducts = await Promise.all(
+          tabChildren.map(async (child) => {
+            const childIds = collectDescendantIds(child);
+            const childItems = await fetchProducts({
+              where: {
+                status: "ACTIVE",
+                images: { some: {} },
+                categories: { some: { categoryId: { in: childIds } } },
+              },
+              orderBy: { createdAt: "desc" },
+              take: 10,
+            });
+            return { child, items: childItems };
+          }),
+        );
+
+        return { node, items, tabChildren, tabProducts };
       }),
     );
 
-    const categorySections: CategorySection[] = sectionResults.map(({ node, items }) => {
-      const tabChildren = node.children.filter((c) => c.descendantProductCount > 0);
-      return {
+    const categorySections: CategorySection[] = sectionResults.map(
+      ({ node, items, tabChildren, tabProducts }) => ({
         category: toHomepageCategory(node),
         products: serializeProducts(items),
         tabs:
           tabChildren.length > 0
             ? [
-                { label: "All", slugs: collectDescendantSlugs(node) },
-                ...tabChildren.map((c) => ({ label: c.name, slugs: collectDescendantSlugs(c) })),
+                {
+                  label: "All",
+                  slugs: collectDescendantSlugs(node),
+                  products: serializeProducts(items),
+                },
+                ...tabProducts.map(({ child, items: childItems }) => ({
+                  label: child.name,
+                  slugs: collectDescendantSlugs(child),
+                  products: serializeProducts(childItems),
+                })),
               ]
             : [],
         totalCount: node.descendantProductCount,
-      };
-    });
+      }),
+    );
 
     // Admin-configured sections — use the targeted lists we already fetched.
     const featuredProducts = serializeProducts(featuredRows);
     const saleProducts = serializeProducts(saleRows);
-    const newProducts = serializeProducts(newRows);
+    // "New Arrivals" samples across a wider pool of recent products so the block
+    // doesn't mirror the catalog's first page (which is also newest-first).
+    const newProducts = serializeProducts(newRows)
+      .filter((_, i) => i % 4 === 0)
+      .slice(0, 10);
     const popularProducts = serializeProducts(popularRows);
     const brandProducts = serializeProducts(brandRows);
 
@@ -331,8 +365,16 @@ async function getHomeData() {
 
     const brandSections = getBrandSections(brandProducts, TOP_BRANDS, 8);
 
-    const showcaseNodes = categoryTree
-      .filter((node) => node.descendantProductCount > 0)
+    // Prefer subcategories so the showcase shows several distinct departments
+    // instead of a single root that contains the whole catalog. Fall back to
+    // roots only when there aren't enough child categories with products.
+    const childNodes = categoryTree
+      .flatMap((root) => root.children)
+      .filter((node) => node.descendantProductCount > 0);
+    const showcaseNodes = (childNodes.length >= 3
+      ? childNodes
+      : categoryTree.filter((node) => node.descendantProductCount > 0)
+    )
       .sort((a, b) => b.descendantProductCount - a.descendantProductCount)
       .slice(0, 8);
 
@@ -383,6 +425,7 @@ async function getHomeData() {
       categorySections,
       brandSections,
       categoryShowcase,
+      productCount: activeProductCount,
     };
   } catch (e) {
     console.error("Homepage data fetch error:", e);
@@ -392,7 +435,7 @@ async function getHomeData() {
       promoStripItems: [], sectionProducts: {}, categories: [],
       featuredProducts: [], saleProducts: [], newProducts: [],
       popularProducts: [], categorySections: [], brandSections: [],
-      categoryShowcase: [],
+      categoryShowcase: [], productCount: 0,
     };
   }
 }

@@ -12,7 +12,6 @@ import { TrustStrip } from "../TrustStrip/TrustStrip";
 import { StatsBand } from "../StatsBand/StatsBand";
 import { ShopByPurpose } from "../ShopByPurpose/ShopByPurpose";
 import { ServicePromise } from "../ServicePromise/ServicePromise";
-import { Testimonials } from "../Testimonials/Testimonials";
 import { KnowledgeHub } from "../KnowledgeHub/KnowledgeHub";
 import { CategoryShowcase } from "../CategoryShowcase/CategoryShowcase";
 import { WhyShopWithUs } from "../WhyShopWithUs/WhyShopWithUs";
@@ -109,6 +108,7 @@ interface Props {
     categorySections: CategorySection[];
     brandSections: BrandSection[];
     categoryShowcase: CategoryShowcaseItem[];
+    productCount: number;
   };
 }
 
@@ -118,6 +118,7 @@ export function MarketplaceHome({ data }: Props) {
     brands, sections, promoStripItems,
     sectionProducts, saleProducts, newProducts,
     popularProducts, categorySections, categoryShowcase,
+    productCount,
   } = data;
 
   return (
@@ -185,7 +186,7 @@ export function MarketplaceHome({ data }: Props) {
 
             {/* === Light supporting blocks between product sections === */}
 
-            <StatsBand />
+            <StatsBand productCount={productCount} />
 
             <PromoBannerGrid smallBanners={promoSmall} wideBanners={promoWide} />
 
@@ -240,9 +241,6 @@ export function MarketplaceHome({ data }: Props) {
 
             {/* Why shop with us */}
             <WhyShopWithUs />
-
-            {/* Testimonials */}
-            <Testimonials />
 
             {/* Brand Strip */}
             {brands.length > 0 && <BrandStrip brands={brands} />}
