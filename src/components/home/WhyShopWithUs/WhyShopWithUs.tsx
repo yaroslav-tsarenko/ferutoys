@@ -22,17 +22,17 @@ const reasons = [
   {
     icon: RefreshCw,
     title: "Easy returns",
-    desc: "Changed your mind? Return within 14 days — no questions asked.",
+    desc: "Changed your mind? Our voluntary 30-day return commitment has you covered, alongside your statutory rights.",
   },
   {
     icon: Award,
-    title: "Best prices",
-    desc: "We guarantee competitive pricing. Found it cheaper? We'll match it.",
+    title: "Private by design",
+    desc: "Secure, private checkout and careful handling of your data — your privacy is never an afterthought.",
   },
   {
     icon: Headphones,
-    title: "24/7 support",
-    desc: "Our team is available around the clock to help with anything.",
+    title: "Caring support",
+    desc: "Our team replies discreetly within 24 hours to help with anything you need.",
   },
 ];
 

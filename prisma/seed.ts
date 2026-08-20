@@ -17,11 +17,11 @@ async function main() {
     update: {},
     create: {
       id: "default",
-      name: "Silk & Spark",
-      description: "Refined athletic apparel for men, women and kids. Shipped from the United Kingdom.",
-      email: "info@silkandspark.co.uk",
-      currency: "GBP",
-      taxRate: 20,
+      name: "FeruToys",
+      description: "A considered intimacy boutique — pleasure, wellness, lingerie and gifting, shipped discreetly across the EU.",
+      email: "info@ferutoys.com",
+      currency: "EUR",
+      taxRate: 21,
       freeShippingMin: 100,
     },
   });
@@ -67,7 +67,7 @@ async function main() {
       title: "About Us",
       slug: "about-us",
       content:
-        "<p>Welcome to Silk & Spark — a curated apparel edit for men, women and kids.</p><p>We design and source athletic and everyday apparel with sustainable materials — organic cottons, recycled polyesters, and honest fits. Shipped from the United Kingdom with free delivery over £100.</p>",
+        "<p>Welcome to FeruToys — a considered intimacy boutique for pleasure, wellness and self-care.</p><p>We curate body-safe products from trusted, vetted brands — thoughtfully chosen and shipped in plain, discreet packaging across the EU with free delivery over €100.</p>",
       isActive: true,
     },
   });

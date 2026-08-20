@@ -4,7 +4,7 @@ export const metadata = { title: "Payment Policy — FeruToys" };
 
 export default function PaymentPolicyPage() {
   return (
-    <PolicyLayout title="Payment Policy" lastUpdated="29 May 2026">
+    <PolicyLayout title="Payment Policy" lastUpdated="19 August 2026">
       <p>
         This Payment Policy explains how payments are accepted, processed, verified, refunded, and handled
         for purchases made through www.ferutoys.com.
@@ -17,8 +17,9 @@ export default function PaymentPolicyPage() {
         person or business placing an order through the Website.
       </p>
       <p>
-        This Payment Policy should be read together with our Terms and Conditions, Shipping Policy, Returns
-        and Refunds Policy, Privacy Policy, Cookie Policy, and Warranty Policy.
+        This Payment Policy should be read together with our Terms and Conditions, Shipping and Delivery
+        Policy, Returns, Refunds and Withdrawal Policy, Privacy Policy, Cookie Policy, and Warranty and
+        Complaints Policy.
       </p>
 
       <h2>1. Scope of This Policy</h2>
@@ -27,9 +28,9 @@ export default function PaymentPolicyPage() {
         charges, additional warranty options, and any other paid services or charges displayed at checkout.
       </p>
       <p>
-        1.2 FeruToys sells electrical products, electrical materials, wiring accessories, lighting-related
-        products, installation components, distribution and circuit protection products, sockets, switches,
-        cables, mounting accessories, and related goods.
+        1.2 FeruToys sells intimate lifestyle and adult wellness products, including sex toys, vibrators,
+        lubricants, intimate-care products, lingerie, safe-sex products, and related accessories intended
+        for adults aged 18 and over.
       </p>
       <p>
         1.3 By placing an order and submitting payment details, you agree to this Payment Policy.
@@ -68,7 +69,6 @@ export default function PaymentPolicyPage() {
         <li>product price;</li>
         <li>VAT where applicable;</li>
         <li>delivery charges;</li>
-        <li>paid Additional Warranty options where selected;</li>
         <li>discounts or promotional codes where valid;</li>
         <li>any other charges clearly displayed before payment.</li>
       </ul>
@@ -284,135 +284,108 @@ export default function PaymentPolicyPage() {
         abusively, in breach of its terms, or due to technical error.
       </p>
       <p>
-        13.5 If a product, delivery charge, warranty option, currency amount, discount, or order total is
-        clearly incorrect due to a technical or administrative error, we may cancel the order or contact you
-        to confirm whether you wish to proceed at the corrected price.
+        13.5 If a product, delivery charge, currency amount, discount, or order total is clearly incorrect
+        due to a technical or administrative error, we may cancel the order or contact you to confirm
+        whether you wish to proceed at the corrected price.
       </p>
 
-      <h2>14. Additional Warranty Payments</h2>
-      <p>14.1 Where available, paid Additional Warranty options may be selected at checkout.</p>
-      <p>14.2 Unless otherwise stated, Additional Warranty pricing is calculated as follows:</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Additional Warranty option</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>+1 Year Additional Warranty</td><td>10% of the product price, minimum &euro;6.99 / &pound;6.99 / $6.99</td></tr>
-          <tr><td>+2 Year Additional Warranty</td><td>16% of the product price, minimum &euro;9.99 / &pound;9.99 / $9.99</td></tr>
-          <tr><td>+3 Year Additional Warranty</td><td>22% of the product price, minimum &euro;12.99 / &pound;12.99 / $12.99</td></tr>
-        </tbody>
-      </table>
-      <p>14.3 Additional Warranty charges are payable at checkout together with the product price.</p>
+      <h2>14. Refunds</h2>
+      <p>14.1 Refunds are handled in accordance with our Returns, Refunds and Withdrawal Policy.</p>
       <p>
-        14.4 Additional Warranty charges are subject to the Warranty Policy and any product-specific warranty
-        terms.
-      </p>
-      <p>
-        14.5 If you validly cancel or return the product before the Additional Warranty begins and a refund
-        is required by law or approved by FeruToys, the related Additional Warranty charge may also be
-        refunded.
-      </p>
-
-      <h2>15. Refunds</h2>
-      <p>15.1 Refunds are handled in accordance with our Returns, Refunds and Cancellation Policy.</p>
-      <p>
-        15.2 Where a refund is approved, we will normally issue it to the original payment method used for
+        14.2 Where a refund is approved, we will normally issue it to the original payment method used for
         the order.
       </p>
       <p>
-        15.3 We cannot normally refund to a different card, account, person, or payment method.
+        14.3 We cannot normally refund to a different card, account, person, or payment method.
       </p>
       <p>
-        15.4 After we process a refund, your bank, card issuer, or payment provider may take additional time
+        14.4 After we process a refund, your bank, card issuer, or payment provider may take additional time
         to make the funds available.
       </p>
       <p>
-        15.5 Currency conversion differences, card issuer fees, foreign transaction fees, and bank charges
+        14.5 Currency conversion differences, card issuer fees, foreign transaction fees, and bank charges
         are not controlled by FeruToys and are not refundable by FeruToys.
       </p>
       <p>
-        15.6 Customs duties, import VAT, local taxes, brokerage fees, courier handling fees, customs
+        14.6 Customs duties, import VAT, local taxes, brokerage fees, courier handling fees, customs
         clearance fees, and other local charges are not charged by FeruToys and are not refundable by
         FeruToys.
       </p>
 
-      <h2>16. Chargebacks and Payment Disputes</h2>
+      <h2>15. Chargebacks and Payment Disputes</h2>
       <p>
-        16.1 If you have a problem with an order, payment, delivery, return, refund, or warranty claim, you
+        15.1 If you have a problem with an order, payment, delivery, return, refund, or warranty claim, you
         should contact us first at info@ferutoys.com so we can investigate and try to resolve the issue.
       </p>
       <p>
-        16.2 If you open a chargeback, card dispute, or payment dispute, we may be required to provide
+        15.2 If you open a chargeback, card dispute, or payment dispute, we may be required to provide
         information to our payment provider, bank, card network, fraud prevention provider, or dispute
         resolution provider.
       </p>
       <p>
-        16.3 This information may include order details, payment records, tracking information, delivery
+        15.3 This information may include order details, payment records, tracking information, delivery
         confirmation, customer communications, refund records, return status, fraud screening information,
         and relevant evidence.
       </p>
       <p>
-        16.4 We reserve the right to challenge chargebacks or payment disputes where we believe the order
+        15.4 We reserve the right to challenge chargebacks or payment disputes where we believe the order
         was correctly processed, fulfilled, delivered, refunded, or otherwise handled in accordance with our
         policies.
       </p>
       <p>
-        16.5 Fraudulent, abusive, or repeated chargebacks may result in cancellation of future orders,
+        15.5 Fraudulent, abusive, or repeated chargebacks may result in cancellation of future orders,
         restriction of account access, or further action where permitted by law.
       </p>
 
-      <h2>17. Business Customer Payment Terms</h2>
+      <h2>16. Business Customer Payment Terms</h2>
       <p>
-        17.1 Business Customers must pay in full at checkout unless we expressly agree otherwise in writing.
+        16.1 Business Customers must pay in full at checkout unless we expressly agree otherwise in writing.
       </p>
       <p>
-        17.2 FeruToys does not offer credit terms, open account purchasing, or deferred payment to Business
+        16.2 FeruToys does not offer credit terms, open account purchasing, or deferred payment to Business
         Customers unless separately approved in writing.
       </p>
       <p>
-        17.3 Business Customers are responsible for ensuring that purchase orders, internal approvals,
+        16.3 Business Customers are responsible for ensuring that purchase orders, internal approvals,
         VAT/tax information, billing details, and delivery details are correct before payment is made.
       </p>
       <p>
-        17.4 Any order placed by a Business Customer is treated as a business purchase unless we determine
+        16.4 Any order placed by a Business Customer is treated as a business purchase unless we determine
         otherwise.
       </p>
 
-      <h2>18. Sanctions, Restricted Payments, and Compliance</h2>
+      <h2>17. Sanctions, Restricted Payments, and Compliance</h2>
       <p>
-        18.1 We may refuse, cancel, suspend, or block any payment or order where required or appropriate due
+        17.1 We may refuse, cancel, suspend, or block any payment or order where required or appropriate due
         to sanctions, export controls, financial crime controls, payment processor rules, card network rules,
         courier restrictions, customs restrictions, or legal obligations.
       </p>
       <p>
-        18.2 You confirm that you are not subject to sanctions, not located in a restricted territory, and
+        17.2 You confirm that you are not subject to sanctions, not located in a restricted territory, and
         not using the Website to purchase goods in breach of applicable laws, sanctions, or export controls.
       </p>
       <p>
-        18.3 We are not responsible for delays, blocked payments, cancelled orders, withheld transactions, or
+        17.3 We are not responsible for delays, blocked payments, cancelled orders, withheld transactions, or
         payment failures caused by sanctions, compliance checks, payment processor requirements, card
         network rules, or legal restrictions.
       </p>
 
-      <h2>19. Changes to This Payment Policy</h2>
+      <h2>18. Changes to This Payment Policy</h2>
       <p>
-        19.1 We may update this Payment Policy from time to time to reflect changes in payment methods,
+        18.1 We may update this Payment Policy from time to time to reflect changes in payment methods,
         currencies, checkout processes, payment providers, fraud controls, legal requirements, tax rules, or
         business operations.
       </p>
       <p>
-        19.2 The version of this Policy in force at the time you place your order will apply to that order,
+        18.2 The version of this Policy in force at the time you place your order will apply to that order,
         unless a change is required by law or relates to a correction that must be applied.
       </p>
       <p>
-        19.3 When we update this Policy, we will revise the &ldquo;Last updated&rdquo; date at the top of
+        18.3 When we update this Policy, we will revise the &ldquo;Last updated&rdquo; date at the top of
         the page.
       </p>
 
-      <h2>20. Contact Information</h2>
+      <h2>19. Contact Information</h2>
       <p>
         If you have any questions about payments, billing, invoices, refunds, failed payments, or payment
         disputes, please contact us:

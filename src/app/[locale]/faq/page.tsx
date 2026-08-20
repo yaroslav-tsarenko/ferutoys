@@ -8,15 +8,19 @@ import { motion, AnimatePresence } from "framer-motion";
 const faqs = [
   {
     q: "How long does shipping take?",
-    a: "Standard shipping takes 3-5 business days. Express shipping is available for 1-2 business day delivery. Free shipping is offered on orders over £100.",
+    a: "Orders are dispatched from Estonia via trusted carriers such as DPD and FedEx. Estimated delivery times are shown at checkout and depend on your destination. Free delivery is offered on eligible orders over €100.",
+  },
+  {
+    q: "Is my order packaged discreetly?",
+    a: "Always. Every order is sent in plain, neutral outer packaging with no adult imagery or explicit product descriptions. The sender and label show only what is needed for delivery.",
   },
   {
     q: "What is your return policy?",
-    a: "We offer a 14-day return policy on all items. Products must be unused and in their original packaging. Contact our support team to initiate a return.",
+    a: "In addition to your statutory rights, we offer a voluntary 30-day return commitment for eligible unused items with intact hygiene seals. For health and hygiene reasons, some sealed intimate products cannot be returned once opened. See our Returns, Refunds and Withdrawal Policy for details.",
   },
   {
     q: "Do you ship internationally?",
-    a: "Yes! We ship across Estonia and to most EU countries. International shipping typically takes 7-14 business days depending on the destination.",
+    a: "Yes — we ship from Estonia across the EU and to many other countries. Some destinations and products may be restricted; any restriction affecting your order will be communicated before dispatch.",
   },
   {
     q: "How can I track my order?",
@@ -24,19 +28,19 @@ const faqs = [
   },
   {
     q: "What payment methods do you accept?",
-    a: "We accept Visa and Mastercard. All payments are processed securely with SSL encryption.",
+    a: "We accept Visa and Mastercard. All payments are processed securely by our payment provider with SSL encryption and PCI-DSS controls.",
   },
   {
     q: "Can I change or cancel my order?",
-    a: "Orders can be modified or cancelled within 1 hour of placement. After that, please contact our support team and we'll do our best to help.",
+    a: "Orders can usually be modified or cancelled within 1 hour of placement, before fulfilment begins. After that, please contact our support team and we'll do our best to help.",
   },
   {
-    q: "Do you offer gift wrapping?",
-    a: "Yes! Gift wrapping is available at checkout for a small additional fee. You can also include a personalized message with your gift.",
+    q: "How do you protect my privacy?",
+    a: "We handle intimate purchase data with heightened confidentiality and never use it to infer sensitive characteristics for advertising. See our Privacy Policy for how we collect, use and protect your data.",
   },
   {
     q: "How do I contact customer support?",
-    a: "You can reach us via our contact form or email at info@ferutoys.com. We aim to respond within 24 hours on weekdays.",
+    a: "You can reach us via our contact form or email at info@ferutoys.com. We aim to respond discreetly within 24 hours on weekdays.",
   },
 ];
 

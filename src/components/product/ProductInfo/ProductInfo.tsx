@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/Button";
 import {
   Heart,
   ShoppingCart,
-  Gift,
   Truck,
   RotateCcw,
   Lock,
@@ -18,25 +17,8 @@ import {
 import { PriceDisplay } from "@/components/shared/PriceDisplay/PriceDisplay";
 import { QuantitySelector } from "@/components/shared/QuantitySelector/QuantitySelector";
 import { useCart } from "@/providers/CartProvider";
-import { useCurrency } from "@/providers/CurrencyProvider";
-import { formatPrice } from "@/lib/utils/format-price";
 import { useRouter } from "@/i18n/routing";
 import { toast } from "sonner";
-
-/**
- * Optional electronics add-ons on the PDP. Keys align with the
- * "warrantyOption{n}year" translation keys.
- */
-const EXTRAS_OPTIONS = [
-  { key: "none", labelKey: "noWarranty" as const,          nameSuffix: "",                             price: 0 },
-  { key: "ext",  labelKey: "warrantyOption1year" as const, nameSuffix: "+ extended 3-yr warranty",     price: 24.99 },
-  { key: "adp",  labelKey: "warrantyOption2year" as const, nameSuffix: "+ accidental damage cover",    price: 34.99 },
-  { key: "prio", labelKey: "warrantyOption3year" as const, nameSuffix: "+ priority dispatch",          price: 4.99 },
-];
-
-function calcExtraPrice(option: typeof EXTRAS_OPTIONS[number]): number {
-  return option.price;
-}
 
 interface ProductInfoProps {
   id: string;
@@ -77,19 +59,15 @@ export function ProductInfo({
 }: ProductInfoProps) {
   const t = useTranslations("product");
   const [qty, setQty] = useState(1);
-  const [selectedWarranty, setSelectedWarranty] = useState(0);
   const [addedFlash, setAddedFlash] = useState(false);
   const { addItem } = useCart();
-  const { currency, convert } = useCurrency();
   const router = useRouter();
 
   const outOfStock = stockQuantity <= 0;
   const lowStock = stockQuantity > 0 && stockQuantity <= lowStockAlert;
 
-  const extraOption = EXTRAS_OPTIONS[selectedWarranty] ?? EXTRAS_OPTIONS[0];
-  const extraPrice = calcExtraPrice(extraOption);
-  const totalPrice = price + extraPrice;
-  const cartName = extraOption.nameSuffix ? `${name} ${extraOption.nameSuffix}` : name;
+  const totalPrice = price;
+  const cartName = name;
 
   const handleAddToCart = () => {
     addItem({
@@ -256,58 +234,6 @@ export function ProductInfo({
         </motion.p>
       </AnimatePresence>
 
-      <hr className="h-px border-0 bg-[color:var(--color-line)]" />
-
-      {/* Add-ons & extras */}
-      <div className="flex flex-col gap-2.5">
-        <span className="inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[color:var(--color-text)]">
-          <Gift size={13} className="text-[color:var(--color-primary)]" />
-          {t("warranty")}
-        </span>
-        <p className="mb-1 text-xs text-[color:var(--color-text-secondary)]">
-          {t("warrantyStandard")}
-        </p>
-        <div className="grid grid-cols-2 gap-2">
-          {EXTRAS_OPTIONS.map((opt, idx) => {
-            const active = idx === selectedWarranty;
-            return (
-              <motion.button
-                key={opt.key}
-                whileHover={{ y: -1 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", damping: 20, stiffness: 400 }}
-                onClick={() => setSelectedWarranty(idx)}
-                className={`relative flex flex-col items-start gap-0.5 rounded-xl border px-3 py-2.5 text-left text-[13px] font-semibold transition-all ${
-                  active
-                    ? "border-[color:var(--color-primary)] bg-[color:var(--color-primary-tint)] text-[color:var(--color-primary)] shadow-[0_0_0_3px_var(--color-primary-tint)]"
-                    : "border-[color:var(--color-line)] bg-[color:var(--color-bg-elevated)] text-[color:var(--color-text)] hover:border-[color:var(--color-primary)]/60"
-                }`}
-              >
-                {active && (
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute right-2 top-2 inline-flex h-4 w-4 items-center justify-center rounded-full bg-[color:var(--color-primary)] text-white"
-                  >
-                    <Check size={10} strokeWidth={3} />
-                  </motion.span>
-                )}
-                <span className="pr-6">{t(opt.labelKey)}</span>
-                <span
-                  className={`font-mono text-[11px] font-normal tabular-nums ${
-                    active
-                      ? "text-[color:var(--color-primary)]"
-                      : "text-[color:var(--color-text-tertiary)]"
-                  }`}
-                >
-                  {opt.price > 0 ? `+${formatPrice(convert(opt.price), currency)}` : "Included"}
-                </span>
-              </motion.button>
-            );
-          })}
-        </div>
-      </div>
-
       {/* CTAs */}
       <div className="flex flex-col gap-2 sm:gap-3">
         <div className="flex items-center gap-2 sm:gap-3">
@@ -346,11 +272,7 @@ export function ProductInfo({
             }
             className="min-w-0 flex-1 !font-mono !text-[12px] !font-semibold !uppercase !tracking-[0.14em] shadow-[0_0_0_transparent] transition-shadow hover:shadow-[0_0_24px_var(--color-primary-tint)]"
           >
-            {addedFlash
-              ? "Added"
-              : selectedWarranty > 0
-                ? t("addToCartWithWarranty")
-                : t("addToCart")}
+            {addedFlash ? "Added" : t("addToCart")}
           </Button>
           <Button
             isIconOnly

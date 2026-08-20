@@ -10,7 +10,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Mail, MapPin, Clock, Send, Phone,
+  Mail, MapPin, Clock, Send, PackageOpen,
   CheckCircle, MessageSquare, HelpCircle, ShieldCheck,
 } from "lucide-react";
 import { brand, brandAddressLine } from "@/lib/brand";
@@ -20,9 +20,9 @@ const INPUT_CLASS =
 
 const CONTACT_INFO = [
   { icon: Mail, title: "Email us", detail: brand.contact.email, sub: "General enquiries — reply within 24h" },
-  { icon: Phone, title: "Call our team", detail: brand.contact.phone, sub: "Sales, order help & product advice" },
+  { icon: PackageOpen, title: "Discreet delivery", detail: "Plain, neutral packaging", sub: "Private from checkout to doorstep" },
   { icon: MapPin, title: "Registered office", detail: `${brand.company.address.city}, ${brand.company.address.country}`, sub: `${brand.company.legalName} · Co. No. ${brand.company.number}`, tooltip: `${brandAddressLine}\nCompany No. ${brand.company.number}` },
-  { icon: Clock, title: "Support hours", detail: "Mon–Fri 9:00–18:00", sub: "Sat 10:00–14:00 (GMT)" },
+  { icon: Clock, title: "Support hours", detail: "Mon–Fri 9:00–18:00", sub: "Sat 10:00–14:00 (EET)" },
 ];
 
 const TOPICS = [
@@ -265,9 +265,9 @@ export default function ContactPage() {
             </h3>
             <div className="flex flex-col gap-3">
               {[
-                { q: "How long does shipping take?", a: "Standard 5-7 days, Express 2-3 days." },
-                { q: "What is your return policy?", a: "14-day returns on all unused items." },
-                { q: "Do you ship internationally?", a: "Yes, across Estonia and the EU." },
+                { q: "Is my order packaged discreetly?", a: "Always — plain, neutral packaging with no explicit branding." },
+                { q: "What is your return policy?", a: "30-day returns on eligible unused items, plus statutory rights." },
+                { q: "Do you ship internationally?", a: "Yes, from Estonia across the EU and beyond." },
                 { q: "How do I track my order?", a: "Check your account or email for tracking." },
               ].map((faq, i) => (
                 <div key={i} className="rounded-lg bg-[color:var(--color-bg-secondary)] p-3 text-[13px]">

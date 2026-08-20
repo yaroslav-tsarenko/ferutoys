@@ -335,10 +335,10 @@ export function CatalogMenu({ open, onClose, categories }: Props) {
                           <div className="flex flex-col">
                             <span className="eyebrow text-[color:var(--color-accent)]">Free EU shipping</span>
                             <span className="mt-0.5 font-serif text-lg font-medium text-[color:var(--color-text)]">
-                              On {active.name} orders over £100
+                              On {active.name} orders over €100
                             </span>
                             <span className="text-xs text-[color:var(--color-text-tertiary)]">
-                              Same-day dispatch · 14-day returns · Genuine warranty
+                              Discreet packaging · 30-day returns · Secure checkout
                             </span>
                           </div>
                           <Link

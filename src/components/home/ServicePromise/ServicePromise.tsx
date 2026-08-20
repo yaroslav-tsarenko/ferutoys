@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { CheckCircle2, Sparkles, ShieldCheck, Truck } from "lucide-react";
+import { CheckCircle2, Sparkles, ShieldCheck, Truck, RotateCcw } from "lucide-react";
 
 const bullets = [
   "Plain, discreet packaging with no branding on the outside",
@@ -59,22 +59,22 @@ export function ServicePromise() {
           <div className="col-span-2 flex items-center gap-4 rounded-3xl border border-[color:var(--color-line)] bg-[color:var(--color-primary)] p-6 text-[color:var(--color-primary-fg)]">
             <Truck size={38} strokeWidth={1.5} />
             <div className="flex flex-col leading-tight">
-              <span className="font-serif text-4xl font-medium">24h</span>
-              <span className="text-xs text-white/70">Average EU delivery</span>
+              <span className="font-serif text-4xl font-medium">EU-wide</span>
+              <span className="text-xs text-white/70">Tracked delivery from Estonia</span>
             </div>
           </div>
           <div className="flex flex-col gap-3 rounded-2xl border border-[color:var(--color-line)] bg-[color:var(--color-bg-secondary)] p-5">
             <ShieldCheck size={26} className="text-[color:var(--color-primary)]" strokeWidth={1.5} />
             <div className="flex flex-col leading-tight">
               <span className="font-serif text-2xl font-medium text-[color:var(--color-text)]">2y</span>
-              <span className="text-xs text-[color:var(--color-text-secondary)]">Standard warranty</span>
+              <span className="text-xs text-[color:var(--color-text-secondary)]">EU legal guarantee</span>
             </div>
           </div>
           <div className="flex flex-col gap-3 rounded-2xl border border-[color:var(--color-line)] bg-[color:var(--color-primary-tint)] p-5">
-            <Sparkles size={26} className="text-[color:var(--color-primary)]" strokeWidth={1.5} />
+            <RotateCcw size={26} className="text-[color:var(--color-primary)]" strokeWidth={1.5} />
             <div className="flex flex-col leading-tight">
-              <span className="font-serif text-2xl font-medium text-[color:var(--color-text)]">4.9</span>
-              <span className="text-xs text-[color:var(--color-text-secondary)]">Out of 5 customer score</span>
+              <span className="font-serif text-2xl font-medium text-[color:var(--color-text)]">30-day</span>
+              <span className="text-xs text-[color:var(--color-text-secondary)]">Free returns</span>
             </div>
           </div>
         </motion.div>

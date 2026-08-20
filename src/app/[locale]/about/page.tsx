@@ -2,10 +2,10 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
 import { Heart, Truck, Shield, Award } from "lucide-react";
 
 const values = [
-  { icon: <Heart size={28} strokeWidth={1.5} />, title: "Customer First", desc: "Whether you're a professional electrician or a DIY installer, your satisfaction drives every decision we make." },
-  { icon: <Truck size={28} strokeWidth={1.5} />, title: "Fast & Reliable", desc: "We partner with trusted carriers to deliver your electrical supplies quickly and safely, every time." },
-  { icon: <Shield size={28} strokeWidth={1.5} />, title: "Certified Quality", desc: "Every product meets professional installation standards and is sourced from certified manufacturers." },
-  { icon: <Award size={28} strokeWidth={1.5} />, title: "Trade Pricing", desc: "We work directly with manufacturers to offer competitive trade prices on cables, switchgear, and more." },
+  { icon: <Heart size={28} strokeWidth={1.5} />, title: "Judgement-Free", desc: "Pleasure and wellness are personal. We curate with care and respect, so you can explore intimacy on your own terms." },
+  { icon: <Truck size={28} strokeWidth={1.5} />, title: "Discreet & Reliable", desc: "Every order ships in plain, neutral packaging with trusted carriers — private from the moment you check out to the moment it arrives." },
+  { icon: <Shield size={28} strokeWidth={1.5} />, title: "Body-Safe Quality", desc: "We stock body-safe materials from trusted makers, chosen for comfort, safety and lasting quality." },
+  { icon: <Award size={28} strokeWidth={1.5} />, title: "Private & Secure", desc: "Secure, private checkout and careful handling of your data — because your privacy is never an afterthought." },
 ];
 
 export default function AboutPage() {
@@ -20,7 +20,7 @@ export default function AboutPage() {
             About <span className="text-[color:var(--color-accent)]">FeruToys</span>
           </h1>
           <p className="mx-auto max-w-xl text-base leading-relaxed text-[color:var(--color-text-secondary)] sm:text-lg">
-            We&apos;re on a mission to make professional-grade electrical materials accessible to electricians, contractors, and DIY installers. Finding the right cables, switchgear, and installation accessories shouldn&apos;t be complicated.
+            We&apos;re a considered intimacy boutique based in Estonia, shipping across Europe. Our mission is to make pleasure, wellness and self-care feel welcoming, tasteful and free of judgement — chosen with care and delivered with discretion.
           </p>
         </div>
 
@@ -39,7 +39,7 @@ export default function AboutPage() {
         <div className="rounded-3xl bg-[color:var(--color-primary)] p-8 text-center text-[color:var(--color-primary-fg)] sm:p-10">
           <h2 className="mb-3 font-serif text-3xl font-medium tracking-tight sm:text-4xl">Our Promise</h2>
           <p className="mx-auto max-w-lg text-[15px] leading-relaxed opacity-90">
-            We stand behind every electrical product we sell. If you&apos;re not completely satisfied, we&apos;ll make it right — that&apos;s our guarantee to you.
+            We stand behind everything we sell. If something isn&apos;t right, we&apos;ll make it right — discreetly and without fuss. That&apos;s our promise to you.
           </p>
         </div>
       </div>

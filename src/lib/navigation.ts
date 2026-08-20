@@ -47,7 +47,7 @@ export const AUDIENCES: NavLink[] = [
 export const FACETS: NavLink[] = [
   { label: "New In", href: "/catalog?sort=newest" },
   { label: "Best Sellers", href: "/catalog?sort=popular" },
-  { label: "Under £25", href: "/catalog?max=25" },
+  { label: "Under €25", href: "/catalog?maxPrice=25" },
   { label: "Premium & Luxury", href: q("luxury") },
   { label: "Body-Safe Materials", href: q("body safe silicone") },
   { label: "Beginner-Friendly", href: q("beginner") },

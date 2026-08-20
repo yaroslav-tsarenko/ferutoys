@@ -5,12 +5,13 @@ export const metadata = { title: "Policies — FeruToys" };
 
 const policies = [
   { label: "Terms and Conditions", href: "/policies/terms" },
-  { label: "Shipping Policy", href: "/policies/shipping" },
+  { label: "Shipping and Delivery Policy", href: "/policies/shipping" },
   { label: "Privacy Policy", href: "/policies/privacy" },
   { label: "Cookie Policy", href: "/policies/cookies" },
-  { label: "Returns, Refunds and Cancellation Policy", href: "/policies/returns" },
+  { label: "Returns, Refunds and Withdrawal Policy", href: "/policies/returns" },
   { label: "Payment Policy", href: "/policies/payment" },
-  { label: "Warranty Policy", href: "/policies/warranty" },
+  { label: "Warranty and Complaints Policy", href: "/policies/warranty" },
+  { label: "Product Safety and Responsible Use Policy", href: "/policies/safety" },
 ];
 
 export default function PoliciesIndexPage() {

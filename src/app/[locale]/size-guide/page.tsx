@@ -1,52 +1,44 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Ruler, Info, Cable, Battery } from "lucide-react";
+import { ArrowRight, Ruler, Heart, Droplet } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Spec Reference",
+  title: "Size & Materials Guide",
   description:
-    "FeruToys spec reference — dimensions, weight and connector guide across laptops, monitors, audio, mobile and accessories.",
+    "FeruToys size & materials guide — how to read toy dimensions, choose lingerie sizes, understand body-safe materials, and care for your intimate products.",
 };
 
-const LAPTOP_SIZES = [
-  { size: "13\"",  screen: "13.3–13.6",  weight: "0.9–1.2", best: "Ultra-portable · commute" },
-  { size: "14\"",  screen: "14.0–14.2",  weight: "1.1–1.5", best: "Work + travel · daily driver" },
-  { size: "15\"",  screen: "15.3–15.6",  weight: "1.4–1.8", best: "Content · light gaming" },
-  { size: "16\"",  screen: "16.0–16.2",  weight: "1.8–2.2", best: "Pro workflows · creators" },
-  { size: "17\"",  screen: "17.0–17.3",  weight: "2.3–2.9", best: "Desktop replacement · gaming" },
+const TOY_SIZES = [
+  { size: "Petite",   insertable: "7–11 cm",  girth: "2.5–3.5 cm", best: "New to toys · gentle exploration" },
+  { size: "Standard", insertable: "11–15 cm", girth: "3.5–4.5 cm", best: "Most popular · everyday pleasure" },
+  { size: "Large",    insertable: "15–19 cm", girth: "4.5–5.5 cm", best: "Confident users · fuller sensation" },
+  { size: "XL",       insertable: "19 cm+",   girth: "5.5 cm+",    best: "Experienced · maximum fill" },
 ];
 
-const MONITOR_SIZES = [
-  { size: "24\"",  resolution: "1920×1080 / 2560×1440", best: "Office · productivity" },
-  { size: "27\"",  resolution: "2560×1440 / 3840×2160", best: "General · light creative" },
-  { size: "32\"",  resolution: "2560×1440 / 3840×2160", best: "Immersive · dev · video edit" },
-  { size: "34\"",  resolution: "3440×1440 ultrawide",   best: "Multitasking · trading" },
-  { size: "49\"",  resolution: "5120×1440 super-ultra", best: "Pro workstations" },
+const LINGERIE_SIZES = [
+  { size: "XS",  bust: "76–81",  waist: "58–63",  hips: "84–89" },
+  { size: "S",   bust: "81–86",  waist: "63–68",  hips: "89–94" },
+  { size: "M",   bust: "86–91",  waist: "68–74",  hips: "94–99" },
+  { size: "L",   bust: "91–97",  waist: "74–81",  hips: "99–104" },
+  { size: "XL",  bust: "97–104", waist: "81–89",  hips: "104–112" },
 ];
 
-const CONNECTORS = [
+const MATERIALS = [
   {
-    title: "USB-C · Thunderbolt 4",
+    title: "Body-safe silicone",
     detail:
-      "Universal connector for data, power and display. Thunderbolt 4 delivers up to 40 Gbps, 100W charging and dual 4K displays.",
+      "Non-porous, hypoallergenic and soft to the touch. Easy to clean and long-lasting. Use only water-based lubricant to protect the surface.",
   },
   {
-    title: "HDMI 2.1",
+    title: "Glass & metal",
     detail:
-      "4K @ 120Hz or 8K @ 60Hz, VRR, ALLM. Standard for consoles, TVs and modern monitors.",
+      "Non-porous and firm, ideal for temperature play. Compatible with all lubricants. Inspect for chips before each use and store padded.",
   },
   {
-    title: "DisplayPort 2.1",
+    title: "ABS hard plastic",
     detail:
-      "Up to 80 Gbps, 8K @ 60Hz HDR. Preferred for desktop PC → monitor connections at high refresh.",
+      "Firm, smooth and non-porous. Common on bullet vibrators and wands. Works with any lubricant and wipes clean easily.",
   },
-];
-
-const AUDIO_TIERS = [
-  { tier: "Entry",     price: "£30–£120",  detail: "Great for daily commute, calls and casual listening." },
-  { tier: "Enthusiast", price: "£120–£350", detail: "Balanced tuning, ANC, better drivers, all-day comfort." },
-  { tier: "Pro",       price: "£350–£1,200", detail: "Reference tuning, planar/balanced-armature drivers, studio-grade." },
-  { tier: "Reference", price: "£1,200+",   detail: "Flagship cans, tuned DACs, mastering-grade monitors." },
 ];
 
 function Table({
@@ -106,72 +98,83 @@ export default function SizeGuidePage() {
     <div className="mx-auto w-full max-w-[var(--container-content)] px-4 pb-20 pt-8 sm:px-6 lg:px-8">
       {/* Hero */}
       <div className="mb-10 flex flex-col gap-3 border-b border-[color:var(--color-line)] pb-8 sm:mb-14">
-        <span className="eyebrow">FeruToys · Reference</span>
+        <span className="eyebrow">FeruToys · Guide</span>
         <h1 className="font-display text-[36px] font-semibold leading-tight tracking-tight text-[color:var(--color-text)] sm:text-[52px]">
-          Spec reference
+          Size &amp; materials guide
         </h1>
         <p className="max-w-2xl text-base leading-relaxed text-[color:var(--color-text-secondary)] sm:text-lg">
-          Quick reference for the things people ask before they buy: laptop
-          form factors, monitor resolutions, connector standards and audio
-          tiers. If you&apos;re still unsure — ping our support team, we answer
-          in under 2 hours.
+          A gentle reference for the things people ask before they buy: how to
+          read toy dimensions, choose the right lingerie size, understand
+          body-safe materials and care for your products. If you&apos;re still
+          unsure — email our team, we answer discreetly within 24 hours.
         </p>
       </div>
 
-      {/* Laptops */}
+      {/* Toy dimensions */}
       <section className="mb-14">
         <div className="mb-6 flex items-baseline justify-between gap-4">
           <div>
-            <span className="eyebrow">Compute</span>
+            <span className="eyebrow">Toys</span>
             <h2 className="font-display text-2xl font-semibold tracking-tight text-[color:var(--color-text)]">
-              Laptop form factors
+              Reading toy dimensions
             </h2>
           </div>
           <Link
-            href="/catalog/laptops-computers"
+            href="/catalog/erotic-toys-vibrators-17172"
             className="hidden font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[color:var(--color-primary)] hover:underline sm:inline-flex sm:items-center sm:gap-1"
           >
-            Shop laptops <ArrowRight size={14} />
+            Shop toys <ArrowRight size={14} />
           </Link>
         </div>
+        <p className="mb-5 max-w-2xl text-sm leading-relaxed text-[color:var(--color-text-secondary)]">
+          <strong className="text-[color:var(--color-text)]">Insertable length</strong> is the
+          usable length, not the total. <strong className="text-[color:var(--color-text)]">Girth</strong> is
+          the diameter at the widest point. When in doubt, size down — comfort
+          comes first.
+        </p>
         <Table
-          headers={["Size", "Screen (in)", "Weight (kg)", "Best for"]}
-          rows={LAPTOP_SIZES.map((r) => [r.size, r.screen, r.weight, r.best])}
+          headers={["Size", "Insertable", "Girth (diameter)", "Best for"]}
+          rows={TOY_SIZES.map((r) => [r.size, r.insertable, r.girth, r.best])}
         />
       </section>
 
-      {/* Monitors */}
+      {/* Lingerie sizing */}
       <section className="mb-14">
         <div className="mb-6 flex items-baseline justify-between gap-4">
           <div>
-            <span className="eyebrow">Displays</span>
+            <span className="eyebrow">Apparel</span>
             <h2 className="font-display text-2xl font-semibold tracking-tight text-[color:var(--color-text)]">
-              Monitor sizes &amp; resolutions
+              Lingerie &amp; apparel sizing
             </h2>
           </div>
           <Link
-            href="/catalog/displays-monitors"
+            href="/catalog/erotic-clothing-women-s-erotic-clothing-23422-23422"
             className="hidden font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[color:var(--color-primary)] hover:underline sm:inline-flex sm:items-center sm:gap-1"
           >
-            Shop monitors <ArrowRight size={14} />
+            Shop lingerie <ArrowRight size={14} />
           </Link>
         </div>
+        <p className="mb-5 max-w-2xl text-sm leading-relaxed text-[color:var(--color-text-secondary)]">
+          Measurements are in centimetres. Measure over bare skin, keeping the
+          tape snug but not tight. If you fall between sizes, choose the larger
+          for a relaxed fit.
+        </p>
         <Table
-          headers={["Size", "Resolution", "Best for"]}
-          rows={MONITOR_SIZES.map((r) => [r.size, r.resolution, r.best])}
+          headers={["Size", "Bust (cm)", "Waist (cm)", "Hips (cm)"]}
+          rows={LINGERIE_SIZES.map((r) => [r.size, r.bust, r.waist, r.hips])}
         />
       </section>
 
-      {/* Connectors */}
+      {/* Materials */}
       <section className="mb-14">
         <div className="mb-6 flex items-center gap-2 text-[color:var(--color-text)]">
-          <Cable size={18} className="text-[color:var(--color-primary)]" />
+          <Heart size={18} className="text-[color:var(--color-primary)]" />
           <h2 className="font-display text-2xl font-semibold tracking-tight">
-            Connectors
+            Body-safe materials
           </h2>
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {CONNECTORS.map((item) => (
+          {MATERIALS.map((item) => (
             <div
               key={item.title}
               className="rounded-2xl border border-[color:var(--color-line)] bg-[color:var(--color-bg-elevated)] p-5"
@@ -187,42 +190,20 @@ export default function SizeGuidePage() {
         </div>
       </section>
 
-      {/* Audio tiers */}
-      <section className="mb-14">
-        <div className="mb-6 flex items-baseline justify-between gap-4">
-          <div>
-            <span className="eyebrow">Audio</span>
-            <h2 className="font-display text-2xl font-semibold tracking-tight text-[color:var(--color-text)]">
-              Audio tiers
-            </h2>
-          </div>
-          <Link
-            href="/catalog/audio-headphones"
-            className="hidden font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[color:var(--color-primary)] hover:underline sm:inline-flex sm:items-center sm:gap-1"
-          >
-            Shop audio <ArrowRight size={14} />
-          </Link>
-        </div>
-        <Table
-          headers={["Tier", "Price", "What you get"]}
-          rows={AUDIO_TIERS.map((r) => [r.tier, r.price, r.detail])}
-        />
-      </section>
-
-      {/* Note */}
+      {/* Lubricant compatibility note */}
       <section className="rounded-2xl border border-[color:var(--color-line)] bg-[color:var(--color-bg-elevated)] p-6">
         <div className="mb-2 flex items-center gap-2 text-[color:var(--color-text)]">
-          <Info size={16} className="text-[color:var(--color-primary)]" />
+          <Droplet size={16} className="text-[color:var(--color-primary)]" />
           <h3 className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em]">
-            Battery &amp; compatibility notes
+            Lubricant &amp; care notes
           </h3>
         </div>
         <p className="text-sm leading-relaxed text-[color:var(--color-text-secondary)]">
-          Advertised laptop battery life is measured under standard test
-          conditions — real-world figures typically run 70-85% of the rated
-          time depending on brightness, workload and radio use. Charger
-          wattage should match the manufacturer&apos;s spec: too low won&apos;t
-          charge, higher is safe.
+          Use <strong className="text-[color:var(--color-text)]">water-based lubricant</strong> with
+          silicone toys — silicone-based lubricant can degrade the surface.
+          Glass, metal and ABS are compatible with all lubricants. Clean toys
+          before and after each use with warm water and a suitable toy cleaner,
+          let them dry fully, and store them apart in a clean, dry place.
         </p>
       </section>
 
@@ -231,7 +212,7 @@ export default function SizeGuidePage() {
           href="/catalog"
           className="inline-flex items-center gap-2 rounded-lg bg-[color:var(--color-primary)] px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-white transition-all hover:bg-[color:var(--color-primary-hover)]"
         >
-          <Battery size={13} /> Browse catalog <ArrowRight size={13} />
+          <Ruler size={13} /> Browse catalog <ArrowRight size={13} />
         </Link>
       </div>
     </div>

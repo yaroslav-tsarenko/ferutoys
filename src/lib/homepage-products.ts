@@ -153,7 +153,7 @@ export function getBrandSections(
 }
 
 export const TOP_BRANDS = [
-  "Apple", "Samsung", "Sony", "Nike", "Adidas",
-  "Dyson", "Garmin", "The North Face", "Bose", "LG",
-  "KitchenAid", "Under Armour", "Lenovo", "ASUS",
+  "LELO", "We-Vibe", "Womanizer", "Satisfyer", "Fun Factory",
+  "Tenga", "Svakom", "Pjur", "Durex", "System JO",
+  "Njoy", "Doxy", "Fleshlight", "Bijoux Indiscrets",
 ];

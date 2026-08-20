@@ -263,7 +263,7 @@ export const FACETS: { label: string; href: string }[] = [
   { label: "New In", href: "/catalog?sort=newest" },
   { label: "Best Sellers", href: "/catalog?sort=popular" },
   { label: "Deals", href: "/catalog?onSale=true" },
-  { label: "Under £40", href: "/catalog?maxPrice=40" },
+  { label: "Under €40", href: "/catalog?maxPrice=40" },
   { label: "Premium / Luxury", href: "/catalog?minPrice=80&sort=popular" },
   { label: "Body-Safe Materials", href: "/catalog?search=body-safe" },
   { label: "Discreet & Travel", href: "/catalog?search=travel" },

@@ -1,4 +1,5 @@
 import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from "pdf-lib";
+import { brand } from "./brand";
 
 // Numeric coercion compatible with Prisma Decimal or plain numbers
 type Numish = number | { toNumber?: () => number } | undefined | null;
@@ -150,11 +151,12 @@ export async function generateInvoicePdf(data: InvoicePdfData): Promise<Uint8Arr
   y -= 16;
 
   const fromLines = [
-    "FERUTAX OU",
-    "Registration number: 17559757",
-    "Academy House, 11 Dunraven Place",
-    "Bridgend, Mid Glamorgan",
-    "info@ferutoys.com",
+    brand.company.legalName,
+    `Registration number: ${brand.company.number}`,
+    `${brand.company.address.line1}, ${brand.company.address.line2}`,
+    `${brand.company.address.city}, ${brand.company.address.region}`,
+    `${brand.company.address.postcode}, ${brand.company.address.country}`,
+    brand.contact.email,
   ];
   const billLines = [data.customerName, data.customerEmail];
 

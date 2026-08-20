@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Package, PackageOpen, Truck, Globe2 } from "lucide-react";
+import { Package, PackageOpen, RotateCcw, ShieldCheck } from "lucide-react";
 
 interface Props {
   productCount?: number;
@@ -25,8 +25,8 @@ export function StatsBand({ productCount }: Props) {
   const stats = [
     { icon: Package, value: formatCount(productCount), label: "Products in catalog" },
     { icon: PackageOpen, value: "100%", label: "Discreet, unmarked parcels" },
-    { icon: Truck, value: "98%", label: "On-time delivery" },
-    { icon: Globe2, value: "26", label: "Countries served" },
+    { icon: RotateCcw, value: "14-day", label: "Right of withdrawal" },
+    { icon: ShieldCheck, value: "2-year", label: "EU legal guarantee" },
   ];
 
   return (

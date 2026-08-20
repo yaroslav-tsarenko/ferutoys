@@ -16,6 +16,10 @@ import { checkoutSchema, type CheckoutFormData } from "@/lib/validators/checkout
 import { formatPrice } from "@/lib/utils/format-price";
 import { COUNTRIES } from "@/lib/countries";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs/Breadcrumbs";
+import { brand, brandAddressLine } from "@/lib/brand";
+import visaLogo from "@/assets/visa.svg";
+import mastercardLogo from "@/assets/mastercard.svg";
+import pciDssLogo from "@/assets/pci-dss.svg";
 import { toast } from "sonner";
 import {
   Mail, Phone, MapPin, Truck, CreditCard,
@@ -111,7 +115,7 @@ export default function CheckoutPage() {
   const shippingPrice = SHIPPING_METHODS.find((m) => m.key === selectedMethod)?.price ?? 5.99;
 
   const countryData = COUNTRIES.find((c) => c.code === selectedCountry);
-  const phoneHint = countryData ? `${countryData.phone} XX XXX XXXX` : "+44 XX XXX XXXX";
+  const phoneHint = countryData ? `${countryData.phone} XX XXX XXXX` : "+372 XX XXX XXXX";
 
   const discountAmount = discount ? +(cart.subtotal * (discount.percent / 100)).toFixed(2) : 0;
   const discountedSubtotal = Math.max(cart.subtotal - discountAmount, 0);
@@ -390,7 +394,7 @@ export default function CheckoutPage() {
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
                     <label className={LABEL}>{t("city")} *</label>
-                    <input className={`${INPUT_PLAIN} ${errors.shipping?.city ? "!border-[color:var(--color-danger)]" : ""}`} placeholder="London" {...register("shipping.city")} />
+                    <input className={`${INPUT_PLAIN} ${errors.shipping?.city ? "!border-[color:var(--color-danger)]" : ""}`} placeholder="Tallinn" {...register("shipping.city")} />
                     {errors.shipping?.city && <span className={ERROR}>{errors.shipping.city.message}</span>}
                   </div>
                   <div>
@@ -402,7 +406,7 @@ export default function CheckoutPage() {
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
                     <label className={LABEL}>{t("postalCode")} *</label>
-                    <input className={`${INPUT_PLAIN} ${errors.shipping?.postalCode ? "!border-[color:var(--color-danger)]" : ""}`} placeholder="CF31 1JF" {...register("shipping.postalCode")} />
+                    <input className={`${INPUT_PLAIN} ${errors.shipping?.postalCode ? "!border-[color:var(--color-danger)]" : ""}`} placeholder="10145" {...register("shipping.postalCode")} />
                     {errors.shipping?.postalCode && <span className={ERROR}>{errors.shipping.postalCode.message}</span>}
                   </div>
                   <div>
@@ -521,6 +525,44 @@ export default function CheckoutPage() {
                   ))}
                 </div>
 
+                {/* Accepted payment methods */}
+                <div className="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-bg-secondary)] p-4">
+                  <div className="mb-2.5 flex items-center gap-2 text-[13px] font-semibold text-[color:var(--color-text-secondary)]">
+                    <Lock size={14} className="text-[color:var(--color-success)]" />
+                    Secure payment · Visa &amp; Mastercard
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {[
+                      { src: visaLogo, alt: "Visa" },
+                      { src: mastercardLogo, alt: "Mastercard" },
+                      { src: pciDssLogo, alt: "PCI DSS Compliant" },
+                    ].map(({ src, alt }) => (
+                      <span
+                        key={alt}
+                        className="inline-flex h-9 w-[52px] shrink-0 items-center justify-center overflow-hidden rounded-lg border border-[color:var(--color-line)]"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={src.src} alt={alt} className="h-full w-full object-contain" />
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Seller / Merchant of Record */}
+                <div className="rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-bg-secondary)] p-4 text-[13px] leading-relaxed text-[color:var(--color-text-secondary)]">
+                  <div className="mb-1 font-semibold text-[color:var(--color-text)]">Sold by · Merchant of Record</div>
+                  <p>
+                    <strong className="font-medium text-[color:var(--color-text)]">{brand.company.legalName}</strong>
+                    {" "}(trading as {brand.displayName})
+                    <br />
+                    Company number {brand.company.number}
+                    <br />
+                    {brandAddressLine}
+                    <br />
+                    {brand.contact.email}
+                  </p>
+                </div>
+
                 <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-[color:var(--color-line)] bg-[color:var(--color-bg-secondary)] p-4">
                   <input
                     type="checkbox"
@@ -532,20 +574,24 @@ export default function CheckoutPage() {
                     className="mt-0.5 h-4 w-4 shrink-0 accent-[color:var(--color-primary)]"
                   />
                   <span className="text-[13px] leading-relaxed text-[color:var(--color-text-secondary)]">
-                    I agree to the{" "}
+                    I confirm I am 18 or older and agree to the{" "}
+                    <Link href="/policies/terms" className="font-semibold text-[color:var(--color-accent)] hover:underline">
+                      Terms and Conditions
+                    </Link>
+                    ,{" "}
                     <Link href="/policies/privacy" className="font-semibold text-[color:var(--color-accent)] hover:underline">
                       Privacy Policy
                     </Link>{" "}
                     and{" "}
-                    <Link href="/policies/terms" className="font-semibold text-[color:var(--color-accent)] hover:underline">
-                      Terms of Service
+                    <Link href="/policies/returns" className="font-semibold text-[color:var(--color-accent)] hover:underline">
+                      Returns &amp; Withdrawal Policy
                     </Link>
                     .
                   </span>
                 </label>
                 {consentError && (
                   <span className={ERROR}>
-                    Please accept the Privacy Policy to place your order
+                    Please confirm you are 18+ and accept our policies to place your order
                   </span>
                 )}
 

@@ -9,12 +9,12 @@ export async function GET() {
   ];
 
   const sampleRow = [
-    "Reference Studio Monitors — Pair", "SKU-001", "1249.00", "1549.00", "20",
-    "Studio-grade near-field monitors with balanced-drive tweeters, tuned for flat frequency response and low listener fatigue.",
-    "Balanced 6.5\" near-field pair · 200W / channel · XLR + TRS.",
-    "Audio & Headphones", "Speakers", "",
-    "FeruToys Reference", "8.5", "ACTIVE", "", "", "", "", "Electronics > Audio > Speakers > Studio Monitors", "new",
-    "Driver>>Woofer:6.5\" Kevlar|Driver>>Tweeter:1\" silk dome|Power>>Rating:200W per channel|Input>>Connector:XLR + TRS|Frequency>>Response:38Hz–22kHz",
+    "Silk Touch Rechargeable Vibrator", "SKU-001", "69.00", "89.00", "20",
+    "A whisper-quiet, body-safe silicone vibrator with multiple patterns and USB-C charging — soft to the touch and fully waterproof.",
+    "Body-safe silicone · 10 patterns · USB-C rechargeable · waterproof.",
+    "Erotic Toys", "Vibrators", "",
+    "LELO", "0.25", "ACTIVE", "", "", "", "", "Health & Beauty > Personal Care > Massagers", "new",
+    "Material>>Body:Body-safe silicone|Power>>Charging:USB-C rechargeable|Feature>>Waterproof:IPX7|Feature>>Noise:Under 50dB|Dimension>>Insertable:11cm",
   ];
 
   const csv = [headers.join(","), sampleRow.join(",")].join("\n");

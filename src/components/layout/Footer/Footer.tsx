@@ -21,9 +21,9 @@ import {
 import { FeruToysLogo } from "../FeruToysLogo";
 import { brand, brandLegalLine } from "@/lib/brand";
 import { useCurrency } from "@/providers/CurrencyProvider";
-import visaLogo from "@/assets/visa-logo.svg";
-import mastercardLogo from "@/assets/mastercard-logo.svg";
-import pciDssLogo from "@/assets/pci-dss-compliant-logo-vector.svg";
+import visaLogo from "@/assets/visa.svg";
+import mastercardLogo from "@/assets/mastercard.svg";
+import pciDssLogo from "@/assets/pci-dss.svg";
 
 /**
  * FeruToys footer — a warm, boutique, trust-forward tiered layout.
@@ -63,6 +63,7 @@ const customerCareLinks = [
   { href: "/policies/shipping", label: "Discreet shipping" },
   { href: "/policies/returns",  label: "Returns & refunds" },
   { href: "/policies/payment",  label: "Secure payment" },
+  { href: "/policies/safety",   label: "Product safety" },
   { href: "/account/orders",    label: "Track my order" },
   { href: "/faq",               label: "Help & FAQ" },
   { href: "/contact",           label: "Contact us" },
@@ -353,19 +354,19 @@ export function Footer() {
             {/* Row 1 — payment badges + SSL */}
             <div className="flex flex-wrap items-center gap-2">
               {[
-                { src: visaLogo, alt: "Visa", maxH: 20 },
-                { src: mastercardLogo, alt: "Mastercard", maxH: 20 },
-                { src: pciDssLogo, alt: "PCI DSS Compliant", maxH: 30 },
-              ].map(({ src, alt, maxH }) => (
+                { src: visaLogo, alt: "Visa" },
+                { src: mastercardLogo, alt: "Mastercard" },
+                { src: pciDssLogo, alt: "PCI DSS Compliant" },
+              ].map(({ src, alt }) => (
                 <span
                   key={alt}
-                  className="inline-flex h-9 w-14 shrink-0 items-center justify-center rounded-lg bg-[#F4EFE8] px-2"
+                  className="inline-flex h-9 w-[52px] shrink-0 items-center justify-center overflow-hidden rounded-lg"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={src.src}
                     alt={alt}
-                    style={{ maxHeight: maxH, maxWidth: "100%", width: "auto", objectFit: "contain" }}
+                    className="h-full w-full object-contain"
                   />
                 </span>
               ))}

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { useCurrency } from "@/providers/CurrencyProvider";
 
 interface Category {
   id: string;
@@ -108,9 +109,10 @@ const PRICE_INPUT =
   "w-full rounded-md border border-[color:var(--color-line)] bg-[color:var(--color-bg-elevated)] px-3 py-2 text-sm text-[color:var(--color-text)] transition-colors focus:border-[color:var(--color-primary)] focus:outline-none";
 
 function PriceSection({
-  title, minPrice, maxPrice, onMinPriceChange, onMaxPriceChange,
+  title, symbol, minPrice, maxPrice, onMinPriceChange, onMaxPriceChange,
 }: {
   title: string;
+  symbol: string;
   minPrice: string;
   maxPrice: string;
   onMinPriceChange: (v: string) => void;
@@ -168,25 +170,25 @@ function PriceSection({
           className="cursor-pointer rounded-md border border-[color:var(--color-line)] bg-[color:var(--color-bg-elevated)] px-2 py-1.5 text-xs font-medium text-[color:var(--color-text-secondary)] transition-colors hover:border-[color:var(--color-primary)] hover:bg-[color:var(--color-primary-tint)] hover:text-[color:var(--color-primary)]"
           onClick={() => applyPreset("", "25")}
         >
-          Under £25
+          Under {symbol}25
         </button>
         <button
           className="cursor-pointer rounded-md border border-[color:var(--color-line)] bg-[color:var(--color-bg-elevated)] px-2 py-1.5 text-xs font-medium text-[color:var(--color-text-secondary)] transition-colors hover:border-[color:var(--color-primary)] hover:bg-[color:var(--color-primary-tint)] hover:text-[color:var(--color-primary)]"
           onClick={() => applyPreset("25", "50")}
         >
-          £25–£50
+          {symbol}25–{symbol}50
         </button>
         <button
           className="cursor-pointer rounded-md border border-[color:var(--color-line)] bg-[color:var(--color-bg-elevated)] px-2 py-1.5 text-xs font-medium text-[color:var(--color-text-secondary)] transition-colors hover:border-[color:var(--color-primary)] hover:bg-[color:var(--color-primary-tint)] hover:text-[color:var(--color-primary)]"
           onClick={() => applyPreset("50", "100")}
         >
-          £50–£100
+          {symbol}50–{symbol}100
         </button>
         <button
           className="cursor-pointer rounded-md border border-[color:var(--color-line)] bg-[color:var(--color-bg-elevated)] px-2 py-1.5 text-xs font-medium text-[color:var(--color-text-secondary)] transition-colors hover:border-[color:var(--color-primary)] hover:bg-[color:var(--color-primary-tint)] hover:text-[color:var(--color-primary)]"
           onClick={() => applyPreset("100", "")}
         >
-          £100+
+          {symbol}100+
         </button>
       </div>
     </FilterSection>
@@ -211,6 +213,7 @@ export function ProductFilters({
 }: ProductFiltersProps) {
   const t = useTranslations("product");
   const nav = useTranslations("nav");
+  const { symbol } = useCurrency();
 
   return (
     <aside className="flex flex-col overflow-hidden rounded-2xl border border-[color:var(--color-line)] bg-[color:var(--color-bg-elevated)]">
@@ -254,6 +257,7 @@ export function ProductFilters({
 
       <PriceSection
         title={t("priceRange")}
+        symbol={symbol}
         minPrice={minPrice}
         maxPrice={maxPrice}
         onMinPriceChange={onMinPriceChange}
