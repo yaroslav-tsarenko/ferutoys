@@ -5,7 +5,7 @@ import { getSessionUser } from "@/lib/auth";
 import { sendOrderConfirmationEmail, sendOrderInvoiceEmail } from "@/lib/email";
 import { scheduleEmail } from "@/lib/email-jobs";
 import { resolveDiscount, markDiscountUsed } from "@/lib/discounts";
-import { TransfermitAPI } from "@/lib/payments/transfermit";
+import { ColibrixAPI } from "@/lib/payments/colibrix";
 
 export async function POST(request: NextRequest) {
   try {
@@ -95,45 +95,66 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Initialize payment on Transfermit
+    // Initialize payment on Colibrix
     let redirectUrl = "";
     try {
-      const api = new TransfermitAPI();
+      const api = new ColibrixAPI();
 
-      const host = request.headers.get("x-forwarded-host") || request.headers.get("host") || process.env.NEXT_PUBLIC_SITE_URL || "localhost:9997";
+      const host = request.headers.get("x-forwarded-host") || request.headers.get("host") || "localhost:5555";
       const proto = request.headers.get("x-forwarded-proto") || "http";
       const baseUrl = `${proto}://${host}`;
 
-      const clientIp = request.headers.get("x-forwarded-for")?.split(",")[0] || request.headers.get("x-real-ip") || "127.0.0.1";
+      // Colibrix CloudFront WAF blocks request payloads containing "localhost" or "127.0.0.1".
+      // 1. Webhook URL must always be a public HTTPS endpoint
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ferutoys.com";
+      const webhookUrl = `${siteUrl.replace(/\/+$/, "")}/api/webhooks/colibrix`;
+
+      // 2. Return URL: in local dev, use lvh.me (points to 127.0.0.1) to avoid WAF block while redirecting to localhost
+      let returnBaseUrl = baseUrl;
+      if (host.includes("localhost") || host.includes("127.0.0.1")) {
+        const port = host.split(":")[1] || "5555";
+        returnBaseUrl = `http://lvh.me:${port}`;
+      }
+
+      // Convert total amount to minor units (cents)
+      const amountInMinor = Math.round(total * 100);
 
       const paymentData = {
-        amount: total,
-        currency: "EUR",
-        referenceId: order.id,
+        order: {
+          amount: amountInMinor,
+          currency: "EUR",
+          description: `Order ${order.orderNumber || order.id} payment`,
+          reference_id: order.id,
+        },
+        payment_method: {
+          type: "card" as const,
+        },
+        available_payment_methods: ["card", "apple_pay", "google_pay"] as const,
         customer: {
-          referenceId: order.id,
-          firstName: validated.shipping.firstName,
-          lastName: validated.shipping.lastName,
+          first_name: validated.shipping.firstName,
+          last_name: validated.shipping.lastName,
           email: validated.contact.email,
           phone: validated.contact.phone || undefined,
-          ip: clientIp,
+          address: {
+            line1: validated.shipping.address1,
+            city: validated.shipping.city,
+            country: validated.shipping.country,
+            postal_code: validated.shipping.postalCode,
+            state: validated.shipping.province || undefined,
+          },
         },
-        billingAddress: {
-          addressLine1: validated.shipping.address1,
-          addressLine2: validated.shipping.address2 || undefined,
-          city: validated.shipping.city,
-          countryCode: validated.shipping.country,
-          postalCode: validated.shipping.postalCode,
-          state: validated.shipping.province || undefined,
+        settings: {
+          expires_in: 900,
+          language: "en-GB",
+          return_url: `${returnBaseUrl}/order/confirmed?orderId=${order.id}`,
+          webhook_url: webhookUrl,
         },
-        returnUrl: `${baseUrl}/order/confirmed?orderId=${order.id}`,
-        webhookUrl: `${baseUrl}/api/webhooks/transfermit`,
       };
 
-      const transfermitRes = await api.createPayment(paymentData);
+      const colibrixRes = await api.createPaymentSession(paymentData);
 
-      if (transfermitRes && transfermitRes.result) {
-        const { id: paymentId, redirectUrl: rUrl } = transfermitRes.result;
+      if (colibrixRes && colibrixRes.transaction_id) {
+        const { transaction_id: paymentId, redirect_url: rUrl } = colibrixRes;
 
         // Update order with paymentId
         await prisma.order.update({
@@ -145,10 +166,10 @@ export async function POST(request: NextRequest) {
 
         redirectUrl = rUrl || "";
       } else {
-        throw new Error("Transfermit did not return a valid result.");
+        throw new Error("Colibrix did not return a valid transaction_id.");
       }
     } catch (e) {
-      console.error("Transfermit payment creation failed:", e);
+      console.error("Colibrix payment creation failed:", e);
 
       // Rollback order creation
       await prisma.order.delete({
