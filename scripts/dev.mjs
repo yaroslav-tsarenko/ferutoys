@@ -1,7 +1,10 @@
 import { spawn, execSync } from "child_process";
+import os from "os";
+import path from "path";
+import fs from "fs";
 
 const DB_PORTS = [51213, 51214, 51215];
-const NEXT_PORT = 9997;
+const NEXT_PORT = 5555;
 
 function killPort(port) {
   try {
@@ -18,6 +21,20 @@ function killPort(port) {
 console.log("\n[dev] Cleaning up old processes...");
 for (const port of [...DB_PORTS, NEXT_PORT]) {
   killPort(port);
+}
+
+// Clean up Prisma Dev server lock file if it exists
+try {
+  const lockPath = path.join(
+    os.homedir(),
+    "Library/Application Support/prisma-dev-nodejs/durable-streams/default/server.lock.lock"
+  );
+  if (fs.existsSync(lockPath)) {
+    fs.rmSync(lockPath, { recursive: true, force: true });
+    console.log("  cleaned up Prisma dev lock file");
+  }
+} catch (e) {
+  // Ignore errors
 }
 
 console.log("[dev] Starting Prisma Postgres...");
