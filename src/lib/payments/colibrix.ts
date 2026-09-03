@@ -126,10 +126,11 @@ export class ColibrixAPI {
     this.apiKey = process.env.COLIBRIX_API_KEY || "";
     this.signatureKey = process.env.COLIBRIX_SIGNATURE_KEY || "";
     
-    // Support custom base URL, defaulting to DEV or PROD
+    // COLIBRIX_GATE_STATUS: "true" for live (PROD), "false" (or unset) for sandbox (DEV)
+    const isLive = process.env.COLIBRIX_GATE_STATUS === "true";
     this.baseUrl =
       process.env.COLIBRIX_BASE_URL ||
-      (process.env.NODE_ENV === "production"
+      (isLive
         ? "https://mapi.clx.acq.mellifera.tech/api/v2"
         : "https://mapi.new.acq.mellifera.dev/api/v2");
   }
