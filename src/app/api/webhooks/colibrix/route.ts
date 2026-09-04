@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import crypto from "crypto";
+import { sendOrderConfirmationEmail, sendOrderInvoiceEmail } from "@/lib/email";
+import { scheduleEmail } from "@/lib/email-jobs";
 
 export async function POST(request: NextRequest) {
   try {
@@ -81,15 +83,35 @@ export async function POST(request: NextRequest) {
     if (transaction_status === "success") {
       switch (transaction_operation) {
         case "charge":
-          await prisma.order.update({
+          const updatedOrder = await prisma.order.update({
             where: { id: order.id },
             data: {
               status: "CONFIRMED",
               paymentStatus: "PAID",
               paymentId: payment_token,
             },
+            include: { items: true },
           });
           console.log(`[Colibrix Webhook] Order ${order.id} paid successfully via charge`);
+
+          const emailPayload = {
+            orderId: updatedOrder.id,
+            orderNumber: updatedOrder.orderNumber,
+            customerName: updatedOrder.customerName,
+            customerEmail: updatedOrder.customerEmail,
+            items: updatedOrder.items,
+            subtotal: Number(updatedOrder.subtotal),
+            taxAmount: Number(updatedOrder.taxAmount),
+            shippingCost: Number(updatedOrder.shippingCost),
+            discountAmount: Number(updatedOrder.discountAmount),
+            total: Number(updatedOrder.total),
+            shippingMethod: updatedOrder.shippingMethod || "standard",
+            shippingAddress: (updatedOrder.shippingAddress as any) || {},
+            createdAt: updatedOrder.createdAt,
+          };
+
+          scheduleEmail(`order confirmation ${updatedOrder.orderNumber}`, () => sendOrderConfirmationEmail(emailPayload));
+          scheduleEmail(`order invoice ${updatedOrder.orderNumber}`, () => sendOrderInvoiceEmail(emailPayload));
           break;
 
         case "refund":

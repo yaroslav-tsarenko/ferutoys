@@ -190,25 +190,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const emailPayload = {
-      orderId: order.id,
-      orderNumber: order.orderNumber,
-      customerName: order.customerName,
-      customerEmail: order.customerEmail,
-      items: order.items,
-      subtotal: order.subtotal,
-      taxAmount: order.taxAmount,
-      shippingCost: order.shippingCost,
-      discountAmount: order.discountAmount,
-      total: order.total,
-      shippingMethod: order.shippingMethod || "standard",
-      shippingAddress: validated.shipping,
-      createdAt: order.createdAt,
-    };
-
-    scheduleEmail(`order confirmation ${order.orderNumber}`, () => sendOrderConfirmationEmail(emailPayload));
-    scheduleEmail(`order invoice ${order.orderNumber}`, () => sendOrderInvoiceEmail(emailPayload));
-
     return NextResponse.json({ ...order, redirectUrl }, { status: 201 });
   } catch (error) {
     console.error("Error creating order:", error);

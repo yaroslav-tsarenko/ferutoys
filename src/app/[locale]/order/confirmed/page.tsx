@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { CheckCircle, Package, MapPin, Truck, Mail, ChevronRight } from "lucide-react";
+import { CheckCircle, AlertCircle, Clock, Package, MapPin, Truck, Mail, ChevronRight, RotateCcw } from "lucide-react";
 import { motion } from "framer-motion";
 import { useCurrency } from "@/providers/CurrencyProvider";
 import { formatPrice } from "@/lib/utils/format-price";
@@ -22,14 +22,39 @@ function ConfirmedContent() {
 
   useEffect(() => {
     if (!orderId) return;
-    fetch(`/api/orders/${orderId}`)
-      .then((res) => res.json())
-      .then((data) => setOrder(data?.id ? data : null))
-      .catch(() => setOrder(null))
-      .finally(() => setLoading(false));
+
+    let interval: NodeJS.Timeout;
+    const fetchOrder = () => {
+      fetch(`/api/orders/${orderId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.id) {
+            setOrder(data);
+            if (data.paymentStatus && data.paymentStatus !== "PENDING") {
+              clearInterval(interval);
+            }
+          }
+        })
+        .catch(() => null)
+        .finally(() => setLoading(false));
+    };
+
+    fetchOrder();
+
+    interval = setInterval(fetchOrder, 3000);
+    const timeout = setTimeout(() => clearInterval(interval), 30000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
   }, [orderId]);
 
   if (loading) return <LoadingSpinner />;
+
+  const isFailed = order?.paymentStatus === "FAILED" || order?.status === "CANCELLED";
+  const isPending = order?.paymentStatus === "PENDING" && order?.status === "PENDING";
+  const isPaid = order?.paymentStatus === "PAID" || order?.status === "CONFIRMED";
 
   return (
     <div className="mx-auto mb-16 mt-8 max-w-2xl px-4">
@@ -39,20 +64,47 @@ function ConfirmedContent() {
         transition={{ duration: 0.4, ease: "easeOut" }}
         className="mb-8 text-center"
       >
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-          className="mx-auto mb-4 flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[color:var(--color-success)]/12 text-[color:var(--color-success)]"
-        >
-          <CheckCircle size={40} strokeWidth={1.5} />
-        </motion.div>
-        <span className="eyebrow">Order confirmed</span>
+        {isFailed ? (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            className="mx-auto mb-4 flex h-[72px] w-[72px] items-center justify-center rounded-full bg-red-500/12 text-red-500"
+          >
+            <AlertCircle size={40} strokeWidth={1.5} />
+          </motion.div>
+        ) : isPending ? (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            className="mx-auto mb-4 flex h-[72px] w-[72px] items-center justify-center rounded-full bg-amber-500/12 text-amber-500"
+          >
+            <Clock size={40} strokeWidth={1.5} />
+          </motion.div>
+        ) : (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            className="mx-auto mb-4 flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[color:var(--color-success)]/12 text-[color:var(--color-success)]"
+          >
+            <CheckCircle size={40} strokeWidth={1.5} />
+          </motion.div>
+        )}
+
+        <span className="eyebrow">
+          {isFailed ? "Payment Unsuccessful" : isPending ? "Payment Processing" : "Order Confirmed"}
+        </span>
         <h1 className="mb-2 mt-2 font-serif text-3xl font-medium tracking-tight text-[color:var(--color-text)] sm:text-[40px]">
-          {t("orderPlaced")}
+          {isFailed ? "Payment Failed or Cancelled" : isPending ? "Waiting for Payment Confirmation" : t("orderPlaced")}
         </h1>
         <p className="text-[15px] text-[color:var(--color-text-secondary)]">
-          Thank you for your order. We&apos;ll send a confirmation email shortly.
+          {isFailed
+            ? "Your payment was not completed. Please try again or use another payment method."
+            : isPending
+            ? "We are verifying your transaction with Colibrix. This page will update automatically once confirmed."
+            : "Thank you for your order. We've sent a confirmation email."}
         </p>
         {order && (
           <p className="mt-3 text-sm text-[color:var(--color-text-tertiary)]">
@@ -141,18 +193,20 @@ function ConfirmedContent() {
         </motion.div>
       )}
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="mb-6 flex items-center gap-2.5 rounded-lg border border-[color:var(--color-accent)]/30 bg-[color:var(--color-accent-tint)] px-4 py-3.5 text-[13px]"
-      >
-        <Mail size={16} className="shrink-0 text-[color:var(--color-accent)]" />
-        <span className="text-[color:var(--color-text)]">
-          A confirmation email has been sent to{" "}
-          <strong>{order?.customerEmail || "your email"}</strong>
-        </span>
-      </motion.div>
+      {isPaid && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mb-6 flex items-center gap-2.5 rounded-lg border border-[color:var(--color-accent)]/30 bg-[color:var(--color-accent-tint)] px-4 py-3.5 text-[13px]"
+        >
+          <Mail size={16} className="shrink-0 text-[color:var(--color-accent)]" />
+          <span className="text-[color:var(--color-text)]">
+            A confirmation email has been sent to{" "}
+            <strong>{order?.customerEmail || "your email"}</strong>
+          </span>
+        </motion.div>
+      )}
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -160,12 +214,25 @@ function ConfirmedContent() {
         transition={{ delay: 0.6 }}
         className="flex flex-wrap gap-3"
       >
-        <Button as={Link} href="/account/orders" variant="bordered" className="flex-1 basis-[200px]" endContent={<ChevronRight size={16} />}>
-          View Orders
-        </Button>
-        <Button as={Link} href="/catalog" color="primary" className="flex-1 basis-[200px]">
-          Continue Shopping
-        </Button>
+        {isFailed ? (
+          <>
+            <Button as={Link} href="/cart" color="primary" className="flex-1 basis-[200px]" startContent={<RotateCcw size={16} />}>
+              Try Again
+            </Button>
+            <Button as={Link} href="/catalog" variant="bordered" className="flex-1 basis-[200px]">
+              Back to Catalog
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button as={Link} href="/account/orders" variant="bordered" className="flex-1 basis-[200px]" endContent={<ChevronRight size={16} />}>
+              View Orders
+            </Button>
+            <Button as={Link} href="/catalog" color="primary" className="flex-1 basis-[200px]">
+              Continue Shopping
+            </Button>
+          </>
+        )}
       </motion.div>
     </div>
   );
