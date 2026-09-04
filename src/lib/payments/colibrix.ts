@@ -314,4 +314,61 @@ export class ColibrixAPI {
 
     return JSON.parse(responseText);
   }
+
+  /**
+   * Query transaction status directly (GET /card/status_query/{uid})
+   */
+  async getTransactionStatus(transactionId: string): Promise<any> {
+    this.validateCredentials();
+
+    const path = `/card/status_query/${transactionId}`;
+    const baseHost = this.baseUrl.replace(/\/api\/v2\/?$/, "");
+    const url = `${baseHost}${path}`;
+    const signature = this.signPath(path);
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "X-API-KEY": this.apiKey,
+        "X-Signature": signature,
+      },
+    });
+
+    const responseText = await response.text();
+    if (!response.ok) {
+      throw new Error(`Colibrix getTransactionStatus failed with status ${response.status}: ${responseText}`);
+    }
+
+    return JSON.parse(responseText);
+  }
+
+  /**
+   * Request gateway to replay webhook (POST /webhook/replay)
+   */
+  async replayWebhook(transactionId: string): Promise<any> {
+    this.validateCredentials();
+
+    const url = `${this.baseUrl}/webhook/replay`;
+    const rawBody = JSON.stringify({ transaction_id: transactionId });
+    const signature = this.signBody(rawBody);
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "X-API-KEY": this.apiKey,
+        "X-Signature": signature,
+      },
+      body: rawBody,
+    });
+
+    const responseText = await response.text();
+    try {
+      return JSON.parse(responseText);
+    } catch {
+      return { ok: response.ok };
+    }
+  }
 }
