@@ -196,27 +196,28 @@ export default function CheckoutPage() {
       }
 
       const orderData = await res.json();
-      clearCart();
 
       if (orderData.redirectUrl) {
+        clearCart();
         toast.success("Redirecting to payment page...");
         window.location.href = orderData.redirectUrl;
+        return;
       } else {
+        clearCart();
         toast.success("Order placed successfully!");
         router.push(`/order/confirmed?orderId=${orderData.id}`);
       }
     } catch (err: any) {
       toast.error(err.message || "Failed to place order. Please try again.");
-    } finally {
       setSubmitting(false);
     }
   };
 
   useEffect(() => {
-    if (cart.items.length === 0) {
+    if (cart.items.length === 0 && !submitting) {
       router.push("/cart");
     }
-  }, [cart.items.length, router]);
+  }, [cart.items.length, submitting, router]);
 
   if (cart.items.length === 0) return null;
 
